@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+
+    // 1.
+    let name = prompt("Введіть ваше ім'я:");
+    alert("Привіт, " + name + "!");
+    
+
+
+    // 2.
+    /*
+    const CURRENT_YEAR = 2026;
+    let birthYear = Number(prompt("Введіть рік народження:"));
+    let age = CURRENT_YEAR - birthYear;
+    alert("Ваш вік: " + age);
+    */
+
+
+    // 3.
+    /*
+    let side = Number(prompt("Введіть довжину сторони квадрата:"));
+    let perimeter = 4 * side;
+    alert("Периметр квадрата: " + perimeter);
+    */
+
+
+    // 4.
+    /*
+    let radius = Number(prompt("Введіть радіус кола:"));
+    let area = Math.PI * radius * radius;
+    alert("Площа кола: " + area.toFixed(2));
+    */
+
+
+    // 5.
+    /*
+    let distance = Number(prompt("Введіть відстань між містами (км):"));
+    let time = Number(prompt("За скільки годин потрібно дістатися?"));
+    let speed = distance / time;
+    alert("Необхідна швидкість: " + speed + " км/год");
+    */
+
+
+    // 6.
+    /*
+    const RATE = 0.85;
+    let dollars = Number(prompt("Введіть суму в доларах:"));
+    let euros = dollars * RATE;
+    alert("У євро: " + euros.toFixed(2));
+    */
+
+
+    // 7.
+    /*
+    let flashGB = Number(prompt("Введіть обсяг флешки (ГБ):"));
+    let flashMB = flashGB * 1024;
+    let files = Math.floor(flashMB / 820);
+    alert("На флешку поміститься " + files + " файлів.");
+    */
+
+
+    // 8.
+    /*
+    let money = Number(prompt("Скільки грошей у гаманці?"));
+    let chocolatePrice = Number(prompt("Вартість однієї шоколадки:"));
+
+    let chocolates = Math.floor(money / chocolatePrice);
+    let change = money % chocolatePrice;
+
+    alert(
+        "Можна купити " + chocolates +
+        " шоколадок.\nЗдача: " + change
+    );
+    */
+
+
+    // 9.
+    /*
+    let number = Number(prompt("Введіть тризначне число:"));
+
+    let hundreds = Math.floor(number / 100);
+    let tens = Math.floor((number % 100) / 10);
+    let units = number % 10;
+
+    let reversed = units * 100 + tens * 10 + hundreds;
+
+    alert("Перевернуте число: " + reversed);
+    */
+
+
+    // 10.
+    /*
+    let number = Number(prompt("Введіть ціле число:"));
+
+    alert(
+        number % 2 === 0
+            ? "Число парне"
+            : "Число непарне"
+    );
+    */
+
+</script>
+
+</body>
+</html>
