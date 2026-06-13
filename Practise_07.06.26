@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+
+  let pryamoygolnik = {
+      leftTop: { x: 2, y: 8 },
+      rightBottom: { x: 12, y: 2 }
+  };
+  
+  // 1.
+  function pokazhRect(rect) {
+      alert(
+          "Ліва верхня точка: (" +
+          rect.leftTop.x + ", " +
+          rect.leftTop.y + ")\n" +
+          "Права нижня точка: (" +
+          rect.rightBottom.x + ", " +
+          rect.rightBottom.y + ")"
+      );
+  }
+  
+  // 2.
+  function shirina(rect) {
+      return rect.rightBottom.x - rect.leftTop.x;
+  }
+  
+  // 3.
+  function visota(rect) {
+      return rect.leftTop.y - rect.rightBottom.y;
+  }
+  
+  // 4.
+  function arena(rect) {
+      return shirina(rect) * visota(rect);
+  }
+  
+  // 5.
+  function perimetr(rect) {
+      return 2 * (shirina(rect) + visota(rect));
+  }
+  
+  // 6.
+  function pomenyatShiriny(rect, value) {
+      rect.rightBottom.x += value;
+  }
+  
+  // 7. 
+  function pomenyatVisoty(rect, value) {
+      rect.rightBottom.y -= value;
+  }
+  
+  // 8.
+  function changeSize(rect, widthValue, heightValue) {
+      pomenyatShiriny(rect, widthValue);
+      pomenyatVisoty(rect, heightValue);
+  }
+  
+  // 9.
+  function moveX(rect, value) {
+      rect.leftTop.x += value;
+      rect.rightBottom.x += value;
+  }
+  
+  // 10.
+  function moveY(rect, value) {
+      rect.leftTop.y += value;
+      rect.rightBottom.y += value;
+  }
+  
+  // 11.
+  function move(rect, dx, dy) {
+      moveX(rect, dx);
+      moveY(rect, dy);
+  }
+  
+  // 12.
+  function isInside(rect, x, y) {
+      return (
+          x >= rect.leftTop.x &&
+          x <= rect.rightBottom.x &&
+          y <= rect.leftTop.y &&
+          y >= rect.rightBottom.y
+      );
+  }
+  
+  
+  pokazhRect(pryamoygolnik);
+  
+  alert("Ширина: " + shirina(pryamoygolnik));
+  alert("Висота: " + visota(pryamoygolnik));
+  alert("Площа: " + arena(pryamoygolnik));
+  alert("Периметр: " + perimetr(pryamoygolnik));
+  
+  pomenyatShiriny(pryamoygolnik, 5);
+  pomenyatVisoty(pryamoygolnik, 2);
+  
+  pokazhRect(pryamoygolnik);
+  
+  move(pryamoygolnik, 3, 4);
+  
+  pokazhRect(pryamoygolnik);
+  
+  let x = Number(prompt("Введіть X точки:"));
+  let y = Number(prompt("Введіть Y точки:"));
+  
+  alert(
+      isInside(pryamoygolnik, x, y)
+          ? "Точка знаходиться всередині прямокутника"
+          : "Точка знаходиться поза прямокутником"
+  );
+  
+  </script>
+
+</body>
+</html>
