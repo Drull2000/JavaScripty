@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documen</title>
+</head>
+<body>
+
+<script>
+
+    // 1.
+
+    let car = {
+        manufacturer: "Toyota",
+        model: "Camry",
+        year: 2020,
+        averageSpeed: 80
+    };
+
+    function showCarInfo(car) {
+        alert(
+            "Виробник: " + car.manufacturer +
+            "\nМодель: " + car.model +
+            "\nРік випуску: " + car.year +
+            "\nСередня швидкість: " + car.averageSpeed + " км/год"
+        );
+    }
+
+    function calculateTravelTime(car, distance) {
+        let time = distance / car.averageSpeed;
+        let rests = Math.floor(time / 4);
+
+        if (time % 4 === 0 && rests > 0) {
+            rests--;
+        }
+
+        return time + rests;
+    }
+
+    showCarInfo(car);
+
+    let distance = Number(prompt("Введіть відстань (км):"));
+    alert(
+        "Необхідний час: " +
+        calculateTravelTime(car, distance).toFixed(2) +
+        " год."
+    );
+
+
+    // 2.
+
+    let fraction1 = {
+        numerator: 1,
+        denominator: 2
+    };
+
+    let fraction2 = {
+        numerator: 3,
+        denominator: 4
+    };
+
+    function addFractions(a, b) {
+        return {
+            numerator:
+                a.numerator * b.denominator +
+                b.numerator * a.denominator,
+            denominator:
+                a.denominator * b.denominator
+        };
+    }
+
+    function subtractFractions(a, b) {
+        return {
+            numerator:
+                a.numerator * b.denominator -
+                b.numerator * a.denominator,
+            denominator:
+                a.denominator * b.denominator
+        };
+    }
+
+    function multiplyFractions(a, b) {
+        return {
+            numerator:
+                a.numerator * b.numerator,
+            denominator:
+                a.denominator * b.denominator
+        };
+    }
+
+    function divideFractions(a, b) {
+        return {
+            numerator:
+                a.numerator * b.denominator,
+            denominator:
+                a.denominator * b.numerator
+        };
+    }
+
+    function gcd(a, b) {
+        while (b !== 0) {
+            let temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+    function reduceFraction(frac) {
+        let divisor = gcd(
+            frac.numerator,
+            frac.denominator
+        );
+
+        return {
+            numerator: frac.numerator / divisor,
+            denominator: frac.denominator / divisor
+        };
+    }
+
+    let result = reduceFraction(
+        addFractions(fraction1, fraction2)
+    );
+
+    alert(
+        "Сума дробів = " +
+        result.numerator +
+        "/" +
+        result.denominator
+    );
+
+
+    // 3.
+
+    let time = {
+        hours: 20,
+        minutes: 30,
+        seconds: 45
+    };
+
+    function showTime(time) {
+        let h = String(time.hours).padStart(2, "0");
+        let m = String(time.minutes).padStart(2, "0");
+        let s = String(time.seconds).padStart(2, "0");
+
+        alert(h + ":" + m + ":" + s);
+    }
+
+    function normalizeTime(time) {
+
+        time.minutes += Math.floor(time.seconds / 60);
+        time.seconds %= 60;
+
+        time.hours += Math.floor(time.minutes / 60);
+        time.minutes %= 60;
+
+        time.hours %= 24;
+    }
+
+    function addSeconds(time, sec) {
+        time.seconds += sec;
+        normalizeTime(time);
+    }
+
+    function addMinutes(time, min) {
+        time.minutes += min;
+        normalizeTime(time);
+    }
+
+    function addHours(time, hrs) {
+        time.hours += hrs;
+        normalizeTime(time);
+    }
+
+    showTime(time);
+
+    addSeconds(time, 30);
+    showTime(time);
+
+    addMinutes(time, 40);
+    showTime(time);
+
+    addHours(time, 5);
+    showTime(time);
+
+</script>
+
+</body>
+</html>
