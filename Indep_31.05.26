@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+
+    // 1. 
+    
+    let start = Number(prompt("Початок діапазону:"));
+    let end = Number(prompt("Кінець діапазону:"));
+
+    let sum = 0;
+
+    for(let i = start; i <= end; i++){
+        sum += i;
+    }
+
+    alert("Сума = " + sum);
+    
+
+
+    // 2.
+    /*
+    let a = Number(prompt("Введіть перше число:"));
+    let b = Number(prompt("Введіть друге число:"));
+
+    while(b !== 0){
+        let temp = b;
+        b = a % b;
+        a = temp;
+    }
+
+    alert("НСД = " + a);
+    */
+
+
+    // 3.
+    /*
+    let num = Number(prompt("Введіть число:"));
+    let result = "";
+
+    for(let i = 1; i <= num; i++){
+        if(num % i === 0){
+            result += i + " ";
+        }
+    }
+
+    alert("Дільники: " + result);
+    */
+
+
+    // 4.
+    /*
+    let num = Math.abs(Number(prompt("Введіть число:")));
+    let count = 0;
+
+    do{
+        count++;
+        num = Math.floor(num / 10);
+    }while(num > 0);
+
+    alert("Кількість цифр: " + count);
+    */
+
+
+    // 5.
+    /*
+    let positive = 0;
+    let negative = 0;
+    let zeros = 0;
+    let even = 0;
+    let odd = 0;
+
+    for(let i = 1; i <= 10; i++){
+
+        let num = Number(prompt("Введіть число №" + i));
+
+        if(num > 0) positive++;
+        else if(num < 0) negative++;
+        else zeros++;
+
+        if(num % 2 === 0) even++;
+        else odd++;
+    }
+
+    alert(
+    "Додатних: " + positive +
+    "\nВід'ємних: " + negative +
+    "\nНулів: " + zeros +
+    "\nПарних: " + even +
+    "\nНепарних: " + odd
+    );
+    */
+
+
+    // 6.
+    /*
+    do{
+        let a = Number(prompt("Перше число"));
+        let b = Number(prompt("Друге число"));
+        let sign = prompt("Операція (+ - * /)");
+
+        let result;
+
+        switch(sign){
+            case "+": result = a + b; break;
+            case "-": result = a - b; break;
+            case "*": result = a * b; break;
+            case "/": result = a / b; break;
+            default: result = "Помилка";
+        }
+
+        alert("Результат: " + result);
+
+    }while(confirm("Бажаєте ще один приклад?"));
+    */
+
+
+    // 7.
+    /*
+    let num = prompt("Введіть число:");
+    let shift = Number(prompt("На скільки цифр змістити?"));
+
+    shift = shift % num.length;
+
+    let result = num.slice(shift) + num.slice(0, shift);
+
+    alert(result);
+    */
+
+
+    // 8.
+    /*
+    let days = [
+        "Понеділок",
+        "Вівторок",
+        "Середа",
+        "Четвер",
+        "П'ятниця",
+        "Субота",
+        "Неділя"
+    ];
+
+    let i = 0;
+
+    do{
+        let answer = confirm(
+            days[i] +
+            "\nПоказати наступний день?"
+        );
+
+        if(!answer) break;
+
+        i++;
+
+        if(i === days.length){
+            i = 0;
+        }
+
+    }while(true);
+    */
+
+
+    // 9.
+    /*
+    let table = "";
+
+    for(let i = 2; i <= 9; i++){
+
+        table += "Таблиця для " + i + "\n";
+
+        for(let j = 1; j <= 10; j++){
+            table += i + " × " + j + " = " + (i * j) + "\n";
+        }
+
+        table += "\n";
+    }
+
+    alert(table);
+    */
+
+
+    // 10.
+    /*
+    let min = 0;
+    let max = 100;
+
+    while(true){
+
+        let n = Math.floor((min + max) / 2);
+
+        let answer = prompt(
+            "Ваше число > " + n +
+            ", < " + n +
+            " або == " + n +
+            " ?\nВведіть: >, < або ="
+        );
+
+        if(answer === "="){
+            alert("Ваше число: " + n);
+            break;
+        }
+
+        if(answer === ">"){
+            min = n + 1;
+        }
+
+        if(answer === "<"){
+            max = n - 1;
+        }
+    }
+    */
+
+</script>
+
+</body>
+</html>
