@@ -10,7 +10,7 @@ class ExtendedArray extends Array {
             let html = "<ul>\n";
 
             this.forEach(item => {
-                html +=   <li>${item}</li>\n;
+                html += `  <li>${item}</li>\n`;
             });
 
             html += "</ul>";
