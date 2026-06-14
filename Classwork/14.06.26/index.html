@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Notification {
+            send(message) {
+                console.log(`Базове сповіщення: ${message}`);
+            }
+        }
+        class EmailNotification extends Notification {
+            send(message) {
+                console.log(`Відправка по Email: 📧 ${message}`);
+            }
+        }
+        class SMSNotification extends Notification {
+            send(message) {
+                console.log(`Віправка по SMS: 📲 {message}`);
+            }
+        }
+        const notifications = [
+            new Notification(), new EmailNotification(), new SMSNotification()
+        ];
+
+        notifications.forEach(notification => notification.send('Вставнови кешбек в монобанку!'));
+
+        class Printer {
+            print(text) {
+                console.log(`Друк: ${text}`);
+            }
+        }
+        class SecurePrinter extends Printer {
+            print(text) {
+                super.print(`[ЗАШИФРОВАНО] ${text}`);
+                console.log('[LOG] Зашифрований документ розруковано');
+            }
+        }
+        const myPrinter = new SecurePrinter();
+        myPrinter.print('Тигр це вовк а вовк це не тигр!');
+        class Animal {
+            constructor(name) {
+                this.name = name;
+            }
+            speak() {
+                console.log(`${this.name} гавкає!`);
+            }
+            eat() {
+                console.log('animal eats');
+            }
+        }
+        class Dog extends Animal {
+            constructor(name, breed) {
+                super(name)
+                this.breed = breed;
+            }
+            speak() {
+                console.log(`${this.name} гавкає!`);
+            }
+            executeCommand(command) {
+                console.log(`${this.name} executes command ${command}`)
+            }
+        }
+        class Cat extends Animal {
+        }
+        const myPet = new Dog('Тигр', 'Вівчарка');
+        myPet.executeCommand("Сидіти");
+        myPet.eat();
+        myPEt.speak();
+
+        console.log(myPet instanceof Animal) // true
+        console.log(myPet instanceof Dog) // true
+        console.log(myPet instanceof Cat) // false
+    </script>
+</body>
+
+</html>

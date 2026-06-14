@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.
+    // class PrintMachine { 
+    //         constructor( fontSize, color, fontFamily) {
+    //             this.fontFamily = fontFamily
+    //             this.color = color;
+    //             this.fontSize = fontSize;
+    //         }
+        
+        
+    //     print(text) {
+    //         document.write(`
+    //         <p style="
+    //             font-size:${this.fontSize}px;
+    //             color:${this.color};
+    //             font-family:${this.fontFamily};
+    //         ">
+    //             ${text}
+    //         </p>
+    //     `);
+    //     }
+    
+    // }
+    //     let printer = new PrintMachine(
+    //         24,
+    //         "blue",
+    //         "Arial"
+    //     );
+    //     printer.print("Привет! Это демонстрация класса PrintMachine");
+
+        // 2.
+    class News {
+        constructor(title, text, tags, date) {
+            this.title = title;
+            this.text = text;
+            this.tags = tags;
+            this.date = date;
+        }
+
+        getFormattedDate() {
+
+            let today = new Date();
+
+            let diff = 
+                Math.floor(
+                    (today-this.date)/
+                    (1000*60*60*24)
+                );
+
+                if(diff < 1){
+                    return "сегодня";
+                }
+                if(diff < 7){
+                    return diff + "дн. назад";
+                }
+
+                return this.date.toLocalDateString("uk-UA")
+                }
+        print() {
+
+            document.write(`
+            <div style="
+                border:1px black;
+                padding:10px;
+                margin:10px;
+            ">
+                <h2>${this.title}</h2>
+
+                <p>
+                    <i>${this.getFormattedDate()}</i>
+                </p>
+
+                <p>${this.text}</p>
+
+                <p>
+                    <b></b>
+                    ${this.tags.join(", ")}
+                </p>
+
+                
+            </div>
+            `);
+        }       
+    }
+
+    let news1 = new News(
+        "What is Lorem Ipsum?",
+        "bla blalb balbal alb al bla bla bal bl abl abl ball  blalba b albalb al bal b lablablbl balb labl alb blab b lalba bl alb ab ab  la bla balb a lblasbl a blal blab lab lablab lab lal bal bl abl ab lalb al b",
+        ["#lorem, #ipsum, #blablabla"],
+        new Date()
+    );
+
+    news1.print();
+
+    class NewsFeed {
+        constructor() {
+            this.news = [];
+        }
+
+        get count(){
+            return this.news.length;
+        }
+
+        showAll() {
+            this.news.forEach(item => item.print());
+        }
+
+        addNews(newsItem){
+            this.news.push(newsItem);
+        }
+
+        removeNews(title){
+            this.news = this.news.filter(
+                item => item.title != title
+            );
+        }
+
+        sortByDate() {
+            this.news.sort(
+                (a,b) => b.date - a.date
+            );
+        }
+
+        findByTag(tag) {
+
+            return this.news.filter(
+        item => item.tags.includes(tag)
+            );
+        }
+    }
+
+
+    let feed = new NewsFeed();
+
+    feed.addNews(
+        new News(
+        "HTML",
+        "Основи HTML.",
+        ["HTML", "Web"],
+        new Date(2025, 10, 15)
+        )
+    );
+
+    feed.addNews(
+        new News(
+        "CSS",
+        "Основи CSS.",
+        ["CSS", "Web"],
+        new Date(2026, 4, 10)
+        )
+    );
+
+    feed.addNews(
+        new News(
+        "JavaScript",
+        "Основи JavaScript.",
+        ["JavaScript", "Web"],
+        new Date()
+        )
+    );
+
+    document.write("<h1>Кількість новин: "
+    + feed.count +
+    "</h1>");
+
+    feed.sortByDate();
+
+    document.write("<h1>Усі новини</h1>");
+    feed.showAll();
+
+    let result = feed.findByTag("JavaScript");
+
+    document.write(
+    "<h1>Пошук за тегом JavaScript</h1>"
+    );
+
+    result.forEach(
+    item => item.print()
+    );
+
+    feed.removeNews("HTML");
+
+    document.write(
+    "<h1>Після видалення HTML</h1>"
+    );
+
+    feed.showAll();
+    </script>
+</body>
+</html>
