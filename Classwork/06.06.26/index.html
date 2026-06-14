@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let userName = "name";
+        let displayName = userName || 'AHOHİM';
+
+        console.log(displayName);
+
+        let count = 0;
+        let finalCount = count ?? 10;
+        console.log(finalCount);
+
+        let isLoggedIn = true;
+        isLoggedIn && console.log("Показуємо панель користувача")
+
+        const arr = ['Яблуко', 'Банан', 'Апельсин']
+
+        for (let fruit of arr) {
+            console.log(fruit);
+        }
+        const user = {
+            name: 'AHTOH',
+            age: 19
+        };
+
+        for(let key in user) {
+            console.log(key);
+            console.log(user[key]);
+        }
+        greetUser(displayName);
+
+        function greetUser(name) {
+            console.log("Hello, " + name + "!");
+        }
+
+        let calculateArea = function (width, height) {
+            return width * height;
+        };
+
+        const area = calculateArea(10, 15);
+        console.log(area);
+
+        const multiply = (a, b) => a * b;
+        //const multiply = (a, b) => {return a * b;};
+        const square = x => x * x;
+        console.log(multiply(5, 7));
+
+        console.log(square(5));
+        const numbers = [10, 45, 23, 45, 32];
+        console.log(Math.max(...numbers));
+
+        function showInfo(firstName, lastName, ...otherDetails) {
+            console.log(firstName);
+            console.log(lastName);
+            console.log(otherDetails);
+        }
+
+        showInfo('AHTOH', 'IM', 19, 'Developer', 'Ukraine');
+
+        function heavyRecursion(i) {
+            console.log(i);
+
+            if(i === 100) {
+                console.log('Готово!');
+                return;
+            }
+            setTimeout(()=> heavyRecursion(i+1),0);
+        }
+        heavyRecursion(0);      
+        function createCounter() {
+            let count = 0;
+            return function() {
+                count++;
+                return count;
+            };
+        }       
+
+        const myCounter = createCounter();
+
+        console.log(myCounter());
+        console.log(myCounter());
+        console.log(myCounter());
+        console.log(myCounter());
+    </script>
+</body>
+
+</html>
