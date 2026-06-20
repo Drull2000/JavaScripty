@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 0.6em;
+        }
+
+        .new-element {
+            border: 2px dashed red;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="test-paragraph">
+        Lorem ipsum dolor sit.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur.
+    </p>
+    <p id="unique-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing . </p>
+    <button onclick="addElement()">Add element</button>
+    <button onclick="removeElement()">Remove element</button>
+    <div id="container"></div>
+    <script>
+        let counter = 0;
+        function getRandomIntInclusive(min, max) {
+            const minCeiled = Math.ceil(min);
+            const maxFloored = Math.floor(max);
+            // The maximum is inclusive and the minimum is inclusive
+            return Math.floor(Math.random() * (maxFloored - minCeiled + 1)) + minCeiled;
+        }
+        function removeElement() {
+            const container = document.getElementById('container');
+            const children = container.childNodes;
+            counter--;
+            const index = getRandomIntInclusive(0, children.length);
+
+            children[index].remove();
+        }
+        function addElement() {
+            const newDiv = document.createElement('div');
+            counter++;
+            newDiv.textContent = String(counter);
+            newDiv.classList.add('new-element');
+            newDiv.dataset.color = 'red';
+            const container = document.getElementById('container');
+            container.append(newDiv);
+        }
+        const classParagraph = document.querySelector('.test-paragraph');
+        console.log(classParagraph);
+        const idParagraph = document.querySelector('#unique-paragraph');
+        console.log(idParagraph);
+        const paragraphs = document.querySelectorAll('p');
+        console.log(paragraphs);
+    </script>
+</body>
+
+</p>
+
+</html>
