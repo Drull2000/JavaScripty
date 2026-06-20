@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Practice</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section>
+        <h2>Завдання 1</h2>
+
+        <div class="counter">
+            <input type="text" id="number" value="10" readonly>
+
+            <div class="counter-buttons">
+                <button onclick="increase()">▲</button>
+                <button onclick="decrease()">▼</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Завдання 2</h2>
+
+        <button onclick="addBlock()">Add block</button>
+
+        <div id="blocks"></div>
+    </section>
+
+    <section>
+        <h2>Завдання 3</h2>
+
+        <div class="palette">
+            <div class="color" data-color="red" style="background:red"></div>
+            <div class="color" data-color="green" style="background:green"></div>
+            <div class="color" data-color="blue" style="background:blue"></div>
+            <div class="color" data-color="orange" style="background:orange"></div>
+            <div class="color" data-color="purple" style="background:purple"></div>
+        </div>
+
+        <p id="text">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    </section>
+
+    <section>
+        <h2>Завдання 4</h2>
+
+        <h3>Стаття</h3>
+
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+
+        <div id="comments"></div>
+
+        <input type="text" id="userName" placeholder="Ім'я">
+        <br><br>
+
+        <textarea id="commentText" placeholder="Коментар"></textarea>
+        <br>
+
+        <button onclick="addComment()">Додати коментар</button>
+    </section>
+
+    <section>
+        <h2>Завдання 5</h2>
+
+        <input type="text" id="countryInput" placeholder="Введіть країну">
+
+        <div id="suggestions"></div>
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

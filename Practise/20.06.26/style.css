@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, Serif;
+    padding: 20px;
+    background-color: rgb(251, 242, 233);
+}
+
+section {
+    border: 1px solid #8f8f8f77;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+
+.counter {
+    display: flex;
+    width: 120px;
+}
+
+.counter input {
+    width: 80px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.counter-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+
+#blocks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.block {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.palette {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.color {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+
+.comment {
+    border-top: 1px solid #b3c2cb;
+    border-bottom: 1px solid #b3c2cb;
+    
+    padding: 15px 0; 
+    
+    margin-bottom: 20px; 
+}
+
+.comment strong {
+    display: block;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 4px;
+}
+
+.comment span {
+    display: block;
+    font-size: 0.85em;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.comment p {
+    margin: 0;
+    color: #111;
+}
+
+textarea {
+    width: 100%;
+    height: 80px;
+}
+
+
+#suggestions {
+    border: 1px solid #ccc;
+    max-width: 300px;
+}
+
+.suggestion {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    background: #eee;
+}
