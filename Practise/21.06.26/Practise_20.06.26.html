@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота JS</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Юркевич Володимир НАЙКРАЩИЙ ВЧИТЕЛЬ!</h1>
+
+    <section>
+        <h2>Завдання 1</h2>
+
+        <table>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Company</th>
+            </tr>
+
+            <tr>
+                <td>Bill</td>
+                <td>Gates</td>
+                <td>Microsoft</td>
+            </tr>
+
+            <tr>
+                <td>Timothy</td>
+                <td>Cook</td>
+                <td>Apple</td>
+            </tr>
+
+            <tr>
+                <td>Larry</td>
+                <td>Page</td>
+                <td>Google</td>
+            </tr>
+
+            <tr>
+                <td>Mark</td>
+                <td>Zuckerberg</td>
+                <td>Facebook</td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="task2">
+        <h2>Завдання 2</h2>
+
+        <p>
+            На цій ділянці сторінки заборонено виділення тексту
+            та виклик контекстного меню правою кнопкою миші.
+        </p>
+
+        <p>
+            Спробуйте виділити цей текст або натиснути ПКМ.
+        </p>
+    </section>
+
+    <section>
+        <h2>Завдання 3</h2>
+
+        <div class="like-box">
+            <button id="likeBtn">
+                👍 Like <span id="likes">99</span>
+            </button>
+        </div>
+    </section>
+
+    <section>
+        <h2>Завдання 4</h2>
+
+        <div class="calculator">
+
+            <input type="text" id="display" readonly>
+
+            <div class="buttons">
+
+                <button onclick="appendValue('7')">7</button>
+                <button onclick="appendValue('8')">8</button>
+                <button onclick="appendValue('9')">9</button>
+                <button onclick="appendValue('/')">÷</button>
+
+                <button onclick="appendValue('4')">4</button>
+                <button onclick="appendValue('5')">5</button>
+                <button onclick="appendValue('6')">6</button>
+                <button onclick="appendValue('*')">×</button>
+
+                <button onclick="appendValue('1')">1</button>
+                <button onclick="appendValue('2')">2</button>
+                <button onclick="appendValue('3')">3</button>
+                <button onclick="appendValue('-')">−</button>
+
+                <button onclick="appendValue('0')">0</button>
+                <button onclick="appendValue('.')">.</button>
+                <button onclick="calculate()">=</button>
+                <button onclick="appendValue('+')">+</button>
+
+                <button class="clear" onclick="clearDisplay()">C</button>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section>
+        <h2>Завдання 5</h2>
+
+        <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Categories</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Dresses</a></li>
+                    <li><a href="#">Shirts</a></li>
+                    <li><a href="#">Jeans</a></li>
+                    <li><a href="#">Shoes</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    </section>
+
+    <section>
+
+        <h2>Завдання 6</h2>
+
+        <div id="articles">
+
+            <h3>Стаття 1</h3>
+            <p>bla bla bla ble ble ble blu blu blu hap blu blu blu blu blu blublublublublu</p>
+
+            <h3>Стаття 2</h3>
+            <p>bla bla bla ble ble ble blu blu blu hap blu blu blu blu blu blublublublublu</p>
+
+            <h3>Стаття 3</h3>
+            <p>bla bla bla ble ble ble blu blu blu hap blu blu blu blu blu blublublublublu</p>
+
+            <h3>Стаття 4</h3>
+            <p>bla bla bla ble ble ble blu blu blu hap blu blu blu blu blu blublublublublu</p>
+
+            <h3>Стаття 5</h3>
+            <p>bla bla bla ble ble ble blu blu blu hap blu blu blu blu blu blublublublublu</p>
+
+            <h3>Стаття 6</h3>
+            <p>bla bla bla ble ble ble blu blu blu hap blu blu blu blu blu blublublublublu</p>
+
+            <h3>Стаття 7</h3>
+            <p>bla bla bla ble ble ble blu blu blu hap blu blu blu blu blu blublublublublu</p>
+
+            <h3>Стаття 8</h3>
+            <p>bla bla bla ble ble ble blu blu blu hap blu blu blu blu blu blublublublublu</p>
+
+            <h3>Стаття 9</h3>
+            <p>bla bla bla ble ble ble blu blu blu hap blu blu blu blu blu blublublublublu</p>
+
+            <h3>Стаття 10</h3>
+            <p>bla bla bla ble ble ble blu blu blu hap blu blu blu blu blu blublublublublu</p>
+
+        </div>
+
+    </section>
+
+    <button id="scrollToTopBtn" class="scroll-btn">↑</button>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

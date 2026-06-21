@@ -1,0 +1,164 @@
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    background-color: rgb(251, 242, 233);
+}
+
+h1{
+    text-align:center;
+}
+
+section{
+    margin-bottom:50px;
+    padding:20px;
+    border:2px solid #ddd;
+    border-radius:10px;
+}
+
+table{
+    border-collapse:collapse;
+    margin:auto;
+    background:#f2ece6;
+}
+
+th,td{
+    border:3px solid #999;
+    padding:18px 35px;
+    font-size:24px;
+    text-align:center;
+}
+
+.like-box{
+    text-align:center;
+}
+
+#likeBtn{
+    background:#3894f3;
+    color:white;
+    border:none;
+    border-radius:15px;
+    font-size:40px;
+    padding:20px 40px;
+    cursor:pointer;
+}
+
+.calculator{
+    width:280px;
+    margin:auto;
+}
+
+#display{
+    width:100%;
+    height:60px;
+    font-size:28px;
+    text-align:right;
+    margin-bottom:10px;
+}
+
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:5px;
+}
+
+.buttons button{
+    height:60px;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.clear{
+    grid-column:span 4;
+}
+
+.navbar {
+    background-color: #557a95;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links > li > a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    font-size: 18px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown {
+    position: relative; 
+}
+
+.dropdown-menu {
+    display: none; 
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    background-color: #4a6b82;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 160px;
+}
+
+.dropdown-menu li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown:hover > .dropdown-toggle {
+    background-color: #4a6b82;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #3b5466; 
+}
+
+#articles{
+    line-height:2;
+}
+
+.scroll-btn {
+    position: fixed;
+    bottom: 20px;      
+    right: 20px;       
+    width: 45px;        
+    height: 45px;       
+    background-color: #fca374;
+    color: #333;      
+    font-size: 24px;    
+    font-weight: bold;
+    border: 1px solid #555; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    
+    opacity: 0;
+    visibility: hidden;
+}
+
+.scroll-btn:hover {
+    background-color: #e58e5f; 
+    transform: translateY(-3px); 
+}
+
+.scroll-btn.show {
+    opacity: 1;
+    visibility: visible;
+}
