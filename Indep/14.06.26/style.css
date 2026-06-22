@@ -1,0 +1,48 @@
+body{
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+section{
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+h2{
+    margin-top: 0;
+}
+
+.employee-table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.employee-table th,
+.employee-table td{
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+.employee-table th{
+    background: #e6e6e6;
+}
+
+.styled-table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.styled-table th{
+    background: #4CAF50;
+    color: white;
+}
+
+.styled-table td,
+.styled-table th{
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
