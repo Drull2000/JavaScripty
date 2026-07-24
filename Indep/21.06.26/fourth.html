@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:#dcdcdc;
+    font-family:Arial;
+}
+
+#traffic{
+
+    background:#333;
+    padding:20px;
+    border-radius:15px;
+
+}
+
+.light{
+
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    background:#666;
+
+    margin:15px auto;
+
+}
+
+.activeRed{
+    background:red;
+}
+
+.activeYellow{
+    background:yellow;
+}
+
+.activeGreen{
+    background:lime;
+}
+
+button{
+
+    margin-top:25px;
+
+    padding:12px 30px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="traffic">
+
+<div id="red" class="light activeRed"></div>
+
+<div id="yellow" class="light"></div>
+
+<div id="green" class="light"></div>
+
+</div>
+
+<button id="next">Наступний</button>
+
+<script src="fourth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+
+<style>
+
+body{
+
+    margin:0;
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    font-family:Arial;
+
+}
+
+.wrapper{
+
+    position:relative;
+
+}
+
+button{
+
+    padding:15px 30px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+.tooltip{
+
+    position:absolute;
+
+    background:black;
+
+    color:white;
+
+    padding:8px 12px;
+
+    border-radius:5px;
+
+    display:none;
+
+    white-space:nowrap;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<button data-text="Перша кнопка">Кнопка 1</button>
+
+<div class="tooltip"></div>
+
+</div>
+
+<div class="wrapper">
+
+<button data-text="Друга кнопка">Кнопка 2</button>
+
+<div class="tooltip"></div>
+
+</div>
+
+<div class="wrapper">
+
+<button data-text="Третя кнопка">Кнопка 3</button>
+
+<div class="tooltip"></div>
+
+</div>
+
+<script src="sixth.js"></script>
+
+</body>
+</html>
