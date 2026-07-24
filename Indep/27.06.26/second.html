@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f2f2f2;
+    margin:40px;
+}
+
+.container{
+    width:700px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+.question{
+    margin-bottom:25px;
+}
+
+button{
+    padding:12px 25px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#result{
+    margin-top:20px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Тест</h2>
+
+<div class="question">
+
+<p>1. HTML — це...</p>
+
+<label>
+<input type="radio" name="q1" value="1">
+Мова розмітки
+</label>
+
+<br>
+
+<label>
+<input type="radio" name="q1" value="0">
+Мова програмування
+</label>
+
+</div>
+
+<div class="question">
+
+<p>2. JavaScript працює...</p>
+
+<label>
+<input type="radio" name="q2" value="1">
+У браузері
+</label>
+
+<br>
+
+<label>
+<input type="radio" name="q2" value="0">
+Лише у Word
+</label>
+
+</div>
+
+<div class="question">
+
+<p>3. CSS використовується для...</p>
+
+<label>
+<input type="radio" name="q3" value="1">
+Оформлення сайту
+</label>
+
+<br>
+
+<label>
+<input type="radio" name="q3" value="0">
+Створення баз даних
+</label>
+
+</div>
+
+<button id="check">
+Перевірити
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<script src="second.js"></script>
+
+</body>
+</html>

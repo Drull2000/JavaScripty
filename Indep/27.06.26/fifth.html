@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f2f2f2;
+    margin:40px;
+}
+
+.container{
+    width:700px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+select,
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+.students label{
+    display:block;
+    margin:8px 0;
+}
+
+button{
+    padding:10px 25px;
+    margin-top:15px;
+}
+
+#history{
+    margin-top:30px;
+    background:#eee;
+    padding:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Відвідування</h2>
+
+<select id="group">
+<option>П-21</option>
+<option>П-22</option>
+<option>П-23</option>
+</select>
+
+<select id="lesson">
+<option>1 пара</option>
+<option>2 пара</option>
+<option>3 пара</option>
+</select>
+
+<input
+type="text"
+id="topic"
+placeholder="Тема заняття">
+
+<div class="students">
+
+<label><input type="checkbox" value="Іван"> Іван</label>
+
+<label><input type="checkbox" value="Олена"> Олена</label>
+
+<label><input type="checkbox" value="Максим"> Максим</label>
+
+<label><input type="checkbox" value="Марія"> Марія</label>
+
+</div>
+
+<button id="save">Зберегти</button>
+
+<button id="show">Показати</button>
+
+<div id="history"></div>
+
+</div>
+
+<script src="fifth.js"></script>
+
+</body>
+</html>

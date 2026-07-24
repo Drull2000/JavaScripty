@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f3f3f3;
+    margin:40px;
+}
+
+.container{
+    width:800px;
+    margin:auto;
+}
+
+.message{
+    background:white;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:8px;
+    box-shadow:0 0 5px rgba(0,0,0,.2);
+}
+
+.author{
+    color:blue;
+    font-weight:bold;
+}
+
+.date{
+    color:gray;
+    font-size:14px;
+}
+
+form{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+}
+
+input,
+textarea{
+
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+
+    font-size:16px;
+
+}
+
+button{
+
+    padding:12px 25px;
+    cursor:pointer;
+    font-size:16px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Форум</h2>
+
+<div id="messages">
+
+<div class="message">
+
+<div class="author">
+Іван
+</div>
+
+<div class="date">
+22.07.2026
+</div>
+
+<p>
+Всім привіт!
+</p>
+
+</div>
+
+<div class="message">
+
+<div class="author">
+Олена
+</div>
+
+<div class="date">
+23.07.2026
+</div>
+
+<p>
+Як справи?
+</p>
+
+</div>
+
+</div>
+
+<form id="form">
+
+<input
+id="name"
+placeholder="Ваше ім'я"
+required>
+
+<textarea
+id="text"
+placeholder="Ваше повідомлення"
+required></textarea>
+
+<button>
+Додати повідомлення
+</button>
+
+</form>
+
+</div>
+
+<script src="first.js"></script>
+
+</body>
+</html>

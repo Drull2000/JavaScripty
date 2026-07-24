@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f2f2f2;
+    margin:40px;
+}
+
+.container{
+    width:800px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+textarea{
+    width:100%;
+    height:120px;
+    font-size:16px;
+    padding:10px;
+}
+
+.controls{
+    margin:20px 0;
+}
+
+label{
+    margin-right:15px;
+}
+
+button{
+    padding:10px 25px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#result{
+    margin-top:30px;
+    border:2px solid #ccc;
+    min-height:100px;
+    padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Стилізований текст</h2>
+
+<textarea id="text" placeholder="Введіть текст..."></textarea>
+
+<div class="controls">
+
+<p><b>Розмір шрифту</b></p>
+
+<select id="size">
+<option value="16">16 px</option>
+<option value="20">20 px</option>
+<option value="24">24 px</option>
+<option value="32">32 px</option>
+</select>
+
+<p><b>Колір</b></p>
+
+<input type="color" id="color">
+
+<p><b>Стиль</b></p>
+
+<label>
+<input type="checkbox" id="bold">
+Жирний
+</label>
+
+<label>
+<input type="checkbox" id="italic">
+Курсив
+</label>
+
+<label>
+<input type="checkbox" id="underline">
+Підкреслений
+</label>
+
+</div>
+
+<button id="show">
+Показати
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<script src="third.js"></script>
+
+</body>
+</html>
