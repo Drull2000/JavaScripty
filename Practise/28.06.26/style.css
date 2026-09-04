@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #ececec;
+    padding: 30px;
+}
+
+section {
+    max-width: 900px;
+    margin: 0 auto 30px;
+    background: white;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.panel {
+    background: #e9dfd6;
+    border: 1px solid #b9b0a5;
+    border-radius: 8px;
+    padding: 20px 25px 25px;
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+input,
+select {
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 12px;
+    font-size: 18px;
+    border: 1px solid #8a8a8a;
+    border-radius: 4px;
+    background: #f4f4f4;
+}
+
+button {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    min-height: 50px;
+    border: 1px solid #9b9b9b;
+    border-radius: 5px;
+    background: #d4d1cf;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #c7c5c2;
+}
+
+.error {
+    min-height: 20px;
+    margin-top: 6px;
+    color: #b00020;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    border: 1px solid #b9b0a5;
+    background: #f5efe9;
+    border-radius: 6px;
+}
+
+.topbar span {
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 12px;
+}
+
+.topbar button {
+    width: auto;
+    min-width: 90px;
+    min-height: 34px;
+    padding: 6px 14px;
+    font-size: 16px;
+    margin-top: 0;
+}
+
+.user-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 20px;
+}
+
+.user-form .field {
+    margin-bottom: 0;
+}
+
+.user-form .full {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 700px) {
+    .user-form {
+        grid-template-columns: 1fr;
+    }
+}
