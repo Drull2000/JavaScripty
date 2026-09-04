@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+section {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.form-box {
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    padding: 16px;
+    background: #f8f8f8;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.form-row label,
+.text-label {
+    font-weight: 700;
+}
+
+input,
+select,
+button {
+    font-size: 16px;
+    padding: 8px 10px;
+}
+
+.checkbox-row,
+.radio-row,
+.skill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.checkbox-row label,
+.radio-row label,
+.skill-row label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #ddd;
+    border: 1px solid #999;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.result-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.result-table th,
+.result-table td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+.result-table th {
+    background: #e6e6e6;
+    width: 35%;
+}
+
+.color-builder {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.color-mini {
+    display: flex;
+    align-items: center;
+    border: 1px solid #999;
+    background: #f5f5f5;
+}
+
+.color-mini span {
+    width: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.color-mini input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 8px 6px;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.color-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 8px;
+}
+
+.color-sample {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #444;
+    display: inline-block;
+}
+
+.question-list {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.question-list li {
+    margin-bottom: 6px;
+}
+
+.question-form {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.question-form .form-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+    gap: 12px;
+}
+
+@media (max-width: 700px) {
+    .form-grid,
+    .color-grid,
+    .color-builder,
+    .question-form .form-row {
+        grid-template-columns: 1fr;
+    }
+}
