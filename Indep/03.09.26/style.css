@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+section {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.json-panel {
+    border: 1px dashed #7a7a7a;
+    padding: 14px;
+    background: #f9f9f9;
+    border-radius: 6px;
+}
+
+.file-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 18px;
+}
+
+.file-picker label {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.file-picker input[type="file"] {
+    width: 100%;
+    max-width: 420px;
+    padding: 8px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.json-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.json-table th,
+.json-table td {
+    border: 1px solid #9a9a9a;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.json-table th {
+    background: #e8e8e8;
+    width: 42%;
+}
+
+.json-table td {
+    background: #fff;
+    font-family: Consolas, monospace;
+    white-space: pre-wrap;
+}
+
+.value-string {
+    color: #0d5cab;
+}
+
+.value-number {
+    color: #0f7d1f;
+}
+
+.value-boolean {
+    color: #8a2be2;
+}
+
+.value-null {
+    color: #9a9a9a;
+}
