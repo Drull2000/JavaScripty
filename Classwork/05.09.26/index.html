@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="myButton">Click Me</button>
+
+    <script>
+        const button = document.getElementById('myButton');
+
+        button.addEventListener('click', () => {
+            const myPromise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const success = true; 
+
+                    if (success) {
+                        resolve('Операція успішна!');
+                    } else {
+                        reject('Сталася помилка.');
+                    }
+                }, 1000);
+            });
+
+            myPromise
+                .then((message) => {
+                    console.log(message);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+
+            new Promise((resolve) => {
+            resolve(2);
+        }).then((result) => {
+            setTimeout(() => {
+                console.log(result);
+            }, 2000);
+            return result * 2;
+        }).then((result) => {
+            setTimeout(() => {
+                console.log(result);
+            }, 2000);
+            return result * 2;
+        }).then((result) => {
+            setTimeout(() => {
+                console.log(result);
+            }, 2000);
+        });
+
+            new Promise((resolve, reject) => {
+                reject('Сталася помилка у першому промісі');
+                resolve('Перший проміс виконано');
+            })
+                .then((result) => {
+                    console.log(result);
+                    // throw new Error('Сталася помилка у другому промісі');
+                })
+                .then(() => {
+                    console.log(
+                        'Цей код не буде виконано через помилку у попередньому промісі'
+                    );
+                })
+                .catch((error) => {
+                    console.error('Помилка:', error);
+                });
+
+ 
+        });
+    </script>
+</body>
+</html>
