@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function task1() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("Task 1 зделана ббрат");
+                }, 1000);
+            });
+        }
+
+        function task2() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("Task 2 зделана ббрат");
+                }, 2000);
+            });
+        }
+
+        function task3() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("Task 3 зделана ббрат");
+                }, 3000);
+            });
+        }
+
+        async function executeTasks() {
+            console.log(await task1());
+            console.log(await task2());
+            console.log(await task3());
+        }
+
+        async function sumArrayAsync(array) {
+            if (array.length === 0) {
+                throw new Error("Масив пуст как пустая бочка");
+            }
+
+            let sum = 0;
+
+            for (const number of array) {
+                const result = await new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve(number);
+                    }, 1000);
+                });
+
+                sum += result;
+            }
+
+            return sum;
+        }
+
+        async function main() {
+            await executeTasks();
+            console.log("Усе сделано барат");
+
+            try {
+                const result = await sumArrayAsync([1, 2, 3, 4, 5]);
+                console.log("Сума елементів:", result);
+            } catch (error) {
+                console.error("Ашибка:", error.message);
+            }
+        }
+
+        main();
+    </script>
+</body>
+</html>

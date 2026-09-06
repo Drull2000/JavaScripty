@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="myButton">Click Me</button>
+
+    <script>
+        async function sayHello() {
+            return "Привіт!";
+        }
+
+        sayHello().then(message => {
+            console.log(message);
+        });
+
+        async function getProcessData() {
+            const myPromise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("Дані отримані!");
+                }, 2000);
+            });
+
+            console.log("Очікування даних...");
+            const result = await myPromise;
+            console.log(result);
+        }
+
+        function getUserDetails(userId) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (userId === 1) {
+                resolve({ id: 1, name: "John Doe" });
+            } else {
+                reject("User not found");
+            }
+        }, 1000);
+    });
+}
+
+        async function displayUserDetails(userId) {
+            try {
+                const userDetails = await getUserDetails(userId);
+                console.log("User Details:", userDetails);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        displayUserDetails(1);
+
+        getProcessData();
+    </script>
+</body>
+</html>
