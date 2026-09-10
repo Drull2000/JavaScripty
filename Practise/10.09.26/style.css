@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f3f3;
+    color: #222;
+}
+
+.container {
+    width: min(700px, calc(100% - 30px));
+    margin: 40px auto;
+    padding: 25px;
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+button {
+    padding: 12px 20px;
+    border: 0;
+    border-radius: 6px;
+    background: #3478c9;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+#message {
+    min-height: 24px;
+    font-size: 18px;
+}
+
+.error {
+    color: #b00020;
+}
+
+#dogContainer img {
+    display: block;
+    max-width: 100%;
+    max-height: 500px;
+    margin: 20px auto 0;
+    border-radius: 8px;
+}

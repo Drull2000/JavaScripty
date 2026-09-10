@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Поиск фильмов</h1>
+
+        <section class="search-box">
+            <h2>Search:</h2>
+            <form id="searchForm">
+                <label for="title">Title:</label>
+                <input id="title" name="title" type="text" required>
+
+                <label for="type">Type:</label>
+                <select id="type" name="type">
+                    <option value="movie">Movie</option>
+                    <option value="series">Series</option>
+                    <option value="episode">Episode</option>
+                </select>
+
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <p id="message" class="message"></p>
+        <section id="films" class="films"></section>
+        <nav id="pagination" class="pagination" aria-label="Нумерація сторінок"></nav>
+        <section id="details" class="details"></section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

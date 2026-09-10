@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5ede3;
+    color: #222;
+}
+
+.container {
+    width: min(1100px, calc(100% - 30px));
+    margin: 0 auto;
+    padding: 30px 0 50px;
+}
+
+h1 {
+    margin: 0 0 25px;
+    text-align: center;
+}
+
+.search-box {
+    width: min(520px, 100%);
+    margin: 0 auto 25px;
+    padding: 18px;
+    border: 1px solid #c9c0b8;
+    border-radius: 8px;
+    background: #fffaf5;
+}
+
+.search-box h2 {
+    margin: 0 0 15px;
+    text-align: center;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 15px 12px;
+    align-items: center;
+}
+
+input,
+select,
+button {
+    min-height: 36px;
+    padding: 7px 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    grid-column: 1 / -1;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #e6e6e6;
+}
+
+.message {
+    min-height: 24px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.error {
+    color: #ad1d1d;
+}
+
+.films {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.film-card {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 12px;
+    padding: 10px;
+    border: 1px solid #c9c0b8;
+    border-radius: 6px;
+    background: #fffaf5;
+}
+
+.film-card img {
+    width: 90px;
+    height: 130px;
+    object-fit: cover;
+    background: #ddd;
+}
+
+.film-card h3 {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.film-card p {
+    margin: 7px 0;
+}
+
+.details {
+    margin-top: 25px;
+}
+
+.details-box {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 20px;
+    padding: 18px;
+    border: 1px solid #c9c0b8;
+    border-radius: 6px;
+    background: #fffaf5;
+}
+
+.details-box img {
+    width: 220px;
+    max-height: 330px;
+    object-fit: cover;
+}
+
+.details-box h2 {
+    margin-top: 0;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.pagination button {
+    min-width: 34px;
+    padding: 6px 9px;
+}
+
+.pagination .active {
+    background: #555;
+    color: white;
+}
+
+@media (max-width: 800px) {
+    .films {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    form,
+    .details-box {
+        grid-template-columns: 1fr;
+    }
+
+    form label {
+        margin-bottom: -10px;
+    }
+
+    .films {
+        grid-template-columns: 1fr;
+    }
+
+    .details-box img {
+        width: 180px;
+    }
+}
