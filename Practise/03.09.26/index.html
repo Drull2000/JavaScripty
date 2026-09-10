@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Завдання 1</h1>
+        <h2>Реалізуйте JSON formatter.</h2>
+
+        <div class="formatter">
+            <div class="column">
+                <label for="jsonInput">Enter JSON data:</label>
+                <textarea id="jsonInput">[{"id":1,"name":"Mishya","age":23},
+{"id":2,"name":"Jorik","age":26},
+{"id":3,"name":"Sestryha","age":20},
+{"id":4,"name":"Katerina","age":33}]</textarea>
+            </div>
+
+            <button id="formatButton" type="button" aria-label="Format JSON">&#9654;</button>
+
+            <div class="column">
+                <label for="jsonOutput">Formatted JSON data:</label>
+                <pre id="jsonOutput"></pre>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
