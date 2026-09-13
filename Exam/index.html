@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CoinGuard</h1>
+
+        <form id="transactionForm">
+            <div class="form-grid">
+                <div class="field full">
+                    <label for="id">ID</label>
+                    <input id="id" type="text" placeholder="Наприклад: 1" required>
+                </div>
+
+                <div class="field full">
+                    <label for="text">Назва операції</label>
+                    <input id="text" type="text" placeholder="Наприклад: Зарплата" required>
+                </div>
+
+                <div class="field">
+                    <label for="amount">Сума</label>
+                    <input id="amount" type="number" min="0.01" step="0.01" placeholder="1000" required>
+                </div>
+
+                <div class="field">
+                    <label for="type">Тип</label>
+                    <select id="type" required>
+                        <option value="income">Доход</option>
+                        <option value="expense">Витрата</option>
+                    </select>
+                </div>
+
+                <div class="field full">
+                    <label for="date">Дата</label>
+                    <input id="date" type="date" required>
+                </div>
+
+                <div class="field full">
+                    <button type="submit">Додати транзакцію</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="summary">
+            <div class="card">
+                <h3>Загальний баланс</h3>
+                <p id="balance" class="balance">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Загальна сума доходів</h3>
+                <p id="income" class="income">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Загальна сума витрат</h3>
+                <p id="expense" class="expense">0</p>
+            </div>
+        </div>
+
+        <div class="converter">
+            <select id="currencySelect">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="UAH">UAH</option>
+            </select>
+
+            <button id="convertBtn" type="button">Конвертувати баланс</button>
+            <span id="loading" class="loading">Завантаження курсу...</span>
+        </div>
+
+        <div id="converted" class="converted">Баланс: 0 USD</div>
+
+        <div class="transactions">
+            <h2>Транзакції</h2>
+            <ul id="transactionList" class="transaction-list"></ul>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
