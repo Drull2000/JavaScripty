@@ -1,0 +1,15 @@
+# Local and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Local development tools
+node_modules/
+.supabase/
+
+# Environment and secret files
+.env
+.env.*
+!.env.example
+*service_role*
+*secret*
