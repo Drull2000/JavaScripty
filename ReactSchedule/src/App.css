@@ -1,0 +1,37 @@
+.app-shell { max-width: 1160px; margin: 0 auto; padding: 0 52px; }
+.site-header { align-items: center; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; min-height: 92px; }
+.brand { color: var(--ink); font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: .03em; text-decoration: none; text-transform: uppercase; }
+.brand::before { color: var(--blue); content: '●'; margin-right: 9px; }
+.header-status { color: var(--muted); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.header-status span { background: var(--green); border-radius: 50%; display: inline-block; height: 7px; margin-right: 8px; width: 7px; }
+.page-intro { padding: 91px 0 80px; }
+.eyebrow { color: var(--blue); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .12em; margin: 0 0 27px; text-transform: uppercase; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { color: var(--ink); font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(62px, 9vw, 116px); font-weight: 400; letter-spacing: -.055em; line-height: .86; margin-bottom: 34px; }
+h1 em { color: var(--blue); font-style: normal; }
+.page-intro__description { color: var(--muted); font-size: 17px; line-height: 1.55; max-width: 330px; }
+.schedule-section { border-top: 1px solid var(--line); display: grid; grid-template-columns: 30% 1fr; padding: 58px 0 105px; }
+.schedule-section__heading h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 46px; font-weight: 400; letter-spacing: -.04em; }
+.schedule-section__content { min-width: 0; }
+.schedule-meta { align-items: center; border-bottom: 1px solid var(--line); color: var(--muted); display: flex; font-family: 'Space Mono', monospace; font-size: 11px; justify-content: space-between; padding: 0 0 18px; text-transform: uppercase; }
+.legend { align-items: center; display: flex; gap: 8px; }
+.legend i { border-radius: 50%; display: inline-block; height: 7px; margin-left: 9px; width: 7px; }
+.legend__online { background: var(--blue); }
+.legend__offline { background: var(--purple); }
+.lesson-list { display: grid; gap: 13px; margin-top: 16px; }
+.lesson-card { align-items: flex-start; border-radius: 3px; display: flex; gap: 19px; min-height: 156px; padding: 25px 27px; transition: transform .2s, box-shadow .2s; }
+.lesson-card:hover { box-shadow: 8px 8px 0 rgba(25, 34, 45, .12); transform: translate(-3px, -3px); }
+.lesson-card--online { background: var(--blue); color: #f7f9ff; }
+.lesson-card--offline { background: var(--purple); color: #fbf7ff; }
+.lesson-card__marker { align-items: center; border: 1px solid rgba(255,255,255,.5); border-radius: 50%; display: flex; flex: 0 0 38px; font-size: 19px; height: 38px; justify-content: center; }
+.lesson-card__content { display: flex; flex: 1; flex-wrap: wrap; justify-content: space-between; min-width: 0; }
+.lesson-card__type { flex-basis: 100%; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .1em; margin-bottom: 13px; opacity: .72; text-transform: uppercase; }
+.lesson-card h3 { flex-basis: 60%; font-family: 'DM Serif Display', Georgia, serif; font-size: 27px; font-weight: 400; line-height: 1.05; margin-bottom: 16px; }
+.lesson-card time { align-self: center; font-size: 12px; opacity: .8; text-align: right; }
+.lesson-card__button { align-items: center; border: 1px solid rgba(255,255,255,.7); border-radius: 2px; color: inherit; display: inline-flex; font-family: 'Space Mono', monospace; font-size: 10px; gap: 14px; padding: 9px 11px; text-decoration: none; text-transform: uppercase; transition: background .2s, color .2s; }
+.lesson-card__button:hover { background: #fff; color: var(--blue); }
+.lesson-card__notice { align-self: end; font-size: 12px; margin: 0; opacity: .82; }
+.site-footer { border-top: 1px solid var(--line); color: var(--muted); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .1em; padding: 23px 0 30px; text-transform: uppercase; }
+.site-footer span { float: right; }
+@media (max-width: 760px) { .app-shell { padding: 0 22px; } .page-intro { padding: 67px 0 58px; } .schedule-section { display: block; padding-top: 40px; } .schedule-section__heading { margin-bottom: 44px; } .lesson-card h3 { flex-basis: 100%; } .lesson-card time { margin-bottom: 16px; text-align: left; width: 100%; } .lesson-card__button, .lesson-card__notice { margin-top: 5px; } }
+@media (max-width: 460px) { .site-header { align-items: flex-start; flex-direction: column; gap: 12px; justify-content: center; min-height: 108px; } .header-status { font-size: 9px; } .lesson-card { padding: 20px; } .lesson-card__content { display: block; } .lesson-card h3 { font-size: 24px; } .lesson-card time { display: block; margin-bottom: 17px; } .site-footer span { float: none; display: block; margin-top: 9px; } }
