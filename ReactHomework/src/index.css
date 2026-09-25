@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap');
+
+:root { --ink: #19222d; --muted: #6b7682; --green: #49a878; --cream: #f5f2ec; --line: rgba(25, 34, 45, .17); background: var(--cream); color: var(--ink); font-family: 'Space Mono', monospace; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, a { font-family: inherit; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
