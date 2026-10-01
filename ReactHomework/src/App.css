@@ -817,6 +817,17 @@ h1 em {
   border-color: var(--blue);
   outline: 2px solid rgba(40, 97, 199, 0.18);
 }
+.profile-editor__checkbox-label {
+  align-items: center;
+  display: flex !important;
+  gap: 9px;
+}
+.profile-editor input[type="checkbox"] {
+  accent-color: var(--green);
+  display: inline-block;
+  margin: 0;
+  width: auto;
+}
 .profile-badge {
   align-self: flex-start;
   background: var(--ink);
@@ -849,6 +860,106 @@ h1 em {
   font-size: 12px;
   overflow-wrap: anywhere;
 }
+.profile-badge__online {
+  color: var(--green) !important;
+}
+.course-review {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 55px;
+  grid-template-columns: 30% 1fr;
+  padding: 58px 0 85px;
+}
+.course-review h2 {
+  font:
+    400 46px "DM Serif Display",
+    Georgia,
+    serif;
+  margin: 0;
+}
+.course-review__form,
+.course-review__thanks {
+  max-width: 560px;
+}
+.course-review fieldset {
+  border: 0;
+  margin: 0 0 25px;
+  padding: 0;
+}
+.course-review legend,
+.course-review label {
+  color: var(--muted);
+  display: block;
+  font:
+    11px "Space Mono",
+    monospace;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.course-review__ratings {
+  display: flex;
+  gap: 8px;
+}
+.course-review__ratings button {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+  font: 14px "Space Mono", monospace;
+  height: 40px;
+  width: 40px;
+}
+.course-review__ratings button.is-selected,
+.course-review__ratings button:hover {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+.course-review textarea {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--ink);
+  display: block;
+  font: 13px/1.5 "Space Mono", monospace;
+  margin-top: 7px;
+  padding: 11px 13px;
+  resize: vertical;
+  width: 100%;
+}
+.course-review textarea:focus {
+  border-color: var(--blue);
+  outline: 2px solid rgba(40, 97, 199, 0.18);
+}
+.course-review__submit {
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  color: var(--cream);
+  cursor: pointer;
+  font: 11px "Space Mono", monospace;
+  margin-top: 7px;
+  padding: 12px 15px;
+  text-transform: uppercase;
+}
+.course-review__submit:hover {
+  background: var(--green);
+  border-color: var(--green);
+}
+.course-review__thanks h3 {
+  font:
+    400 30px "DM Serif Display",
+    Georgia,
+    serif;
+  margin-bottom: 12px;
+}
+.course-review__thanks p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
 @media (max-width: 760px) {
   .courses-section {
     display: block;
@@ -868,6 +979,12 @@ h1 em {
   .profile-badge {
     margin-top: 35px;
     max-width: 280px;
+  }
+  .course-review {
+    display: block;
+  }
+  .course-review__heading {
+    margin-bottom: 44px;
   }
 }
 .student-header {

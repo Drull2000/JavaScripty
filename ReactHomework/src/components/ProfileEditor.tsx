@@ -2,26 +2,18 @@ import { useState } from 'react'
 
 interface Profile {
   name: string
-  group: string
-  email: string
+  specialty: string
+  isOnline: boolean
 }
 
 const initialProfile: Profile = {
-  name: 'Владислав',
-  group: 'P-410',
-  email: 'vladyslav@example.com',
+  name: "Ваше Ім'я",
+  specialty: 'React Developer',
+  isOnline: true,
 }
 
 export default function ProfileEditor() {
   const [profile, setProfile] = useState<Profile>(initialProfile)
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setProfile((currentProfile) => ({
-      ...currentProfile,
-      [name]: value,
-    }))
-  }
 
   return (
     <section className="profile-editor" aria-labelledby="profile-editor-title">
@@ -30,22 +22,37 @@ export default function ProfileEditor() {
         <h2 id="profile-editor-title">Мій профіль</h2>
         <label>
           Імʼя
-          <input name="name" type="text" value={profile.name} onChange={handleChange} />
+          <input
+            name="name"
+            type="text"
+            value={profile.name}
+            onChange={(event) => setProfile({ ...profile, name: event.target.value })}
+          />
         </label>
         <label>
-          Група
-          <input name="group" type="text" value={profile.group} onChange={handleChange} />
+          Спеціальність
+          <input
+            name="specialty"
+            type="text"
+            value={profile.specialty}
+            onChange={(event) => setProfile({ ...profile, specialty: event.target.value })}
+          />
         </label>
-        <label>
-          Email
-          <input name="email" type="email" value={profile.email} onChange={handleChange} />
+        <label className="profile-editor__checkbox-label">
+          <input
+            name="isOnline"
+            type="checkbox"
+            checked={profile.isOnline}
+            onChange={(event) => setProfile({ ...profile, isOnline: event.target.checked })}
+          />
+          Онлайн
         </label>
       </div>
       <aside className="profile-badge" aria-label="Попередній перегляд профілю">
         <span className="profile-badge__label">Student profile</span>
         <strong>{profile.name || 'Без імені'}</strong>
-        <span>{profile.group || 'Без групи'}</span>
-        <span>{profile.email || 'Без email'}</span>
+        <span>{profile.specialty || 'Без спеціальності'}</span>
+        {profile.isOnline && <span className="profile-badge__online">● Онлайн</span>}
       </aside>
     </section>
   )
