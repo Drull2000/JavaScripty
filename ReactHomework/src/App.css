@@ -1,37 +1,945 @@
-.app-shell { max-width: 1160px; margin: 0 auto; padding: 0 52px; }
-.site-header { align-items: center; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; min-height: 92px; }
-.brand { color: var(--ink); font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: .03em; text-decoration: none; text-transform: uppercase; }
-.brand::before { color: var(--green); content: '●'; margin-right: 9px; }
-.header-status { color: var(--muted); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
-.header-status span { background: var(--green); border-radius: 50%; display: inline-block; height: 7px; margin-right: 8px; width: 7px; }
-.page-intro { padding: 91px 0 80px; }
-.eyebrow { color: var(--green); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .12em; margin: 0 0 27px; text-transform: uppercase; }
-h1, h2, h3, p { margin-top: 0; }
-h1 { color: var(--ink); font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(62px, 9vw, 116px); font-weight: 400; letter-spacing: -.055em; line-height: .86; margin-bottom: 34px; }
-h1 em { color: var(--green); font-style: normal; }
-.page-intro__description { color: var(--muted); font-size: 17px; line-height: 1.55; max-width: 360px; }
-.homework-section { border-top: 1px solid var(--line); display: grid; grid-template-columns: 30% 1fr; padding: 58px 0 105px; }
-.homework-section__heading h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 46px; font-weight: 400; letter-spacing: -.04em; }
-.homework-section__content { min-width: 0; }
-.homework-meta { align-items: center; border-bottom: 1px solid var(--line); color: var(--muted); display: flex; font-family: 'Space Mono', monospace; font-size: 11px; justify-content: space-between; padding: 0 0 18px; text-transform: uppercase; }
-.legend { align-items: center; display: flex; gap: 8px; }
-.legend i { border-radius: 50%; display: inline-block; height: 7px; margin-left: 9px; width: 7px; }
-.legend__completed { background: var(--green); }
-.legend__pending { background: #e78942; }
-.homework-list { display: grid; gap: 13px; margin-top: 16px; }
-.homework-card { align-items: flex-start; border-radius: 3px; display: flex; gap: 19px; min-height: 156px; padding: 25px 27px; transition: transform .2s, box-shadow .2s; }
-.homework-card:hover { box-shadow: 8px 8px 0 rgba(25, 34, 45, .12); transform: translate(-3px, -3px); }
-.homework-card--completed { background: #dcefe2; color: #254d37; }
-.homework-card--pending { background: #f8dfc5; color: #6b3f1d; }
-.homework-card__number { align-items: center; border: 1px solid currentColor; border-radius: 50%; display: flex; flex: 0 0 38px; font-size: 19px; height: 38px; justify-content: center; }
-.homework-card__body { display: flex; flex: 1; flex-wrap: wrap; justify-content: space-between; min-width: 0; }
-.homework-card__course { flex-basis: 100%; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .1em; margin-bottom: 13px; opacity: .72; text-transform: uppercase; }
-.homework-card h3 { flex-basis: 65%; font-family: 'DM Serif Display', Georgia, serif; font-size: 27px; font-weight: 400; line-height: 1.05; margin-bottom: 16px; }
-.homework-card__status { align-self: center; font-size: 12px; margin: 0; text-align: right; }
-.homework-card__button { background: transparent; border: 1px solid currentColor; border-radius: 2px; color: inherit; cursor: pointer; font-size: 11px; padding: 9px 11px; text-transform: uppercase; transition: background .2s, color .2s; }
-.homework-card__button:hover { background: var(--ink); color: #fff; }
-.homework-card__button span { margin-left: 14px; }
-.site-footer { border-top: 1px solid var(--line); color: var(--muted); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .1em; padding: 23px 0 30px; text-transform: uppercase; }
-.site-footer span { float: right; }
-@media (max-width: 760px) { .app-shell { padding: 0 22px; } .page-intro { padding: 67px 0 58px; } .homework-section { display: block; padding-top: 40px; } .homework-section__heading { margin-bottom: 44px; } .homework-card h3 { flex-basis: 100%; } .homework-card__status, .homework-card__button { margin-top: 5px; text-align: left; } }
-@media (max-width: 460px) { .site-header { align-items: flex-start; flex-direction: column; gap: 12px; justify-content: center; min-height: 108px; } .header-status { font-size: 9px; } .homework-card { padding: 20px; } .homework-card__body { display: block; } .homework-card h3 { font-size: 24px; } .homework-card__status, .homework-card__button { display: inline-block; margin-top: 4px; } .site-footer span { float: none; display: block; margin-top: 9px; } }
+.app-shell {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 52px;
+}
+.site-header {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  min-height: 92px;
+}
+.brand {
+  color: var(--ink);
+  font-family: "Space Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.brand::before {
+  color: var(--green);
+  content: "●";
+  margin-right: 9px;
+}
+.header-status {
+  color: var(--muted);
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.header-status span {
+  background: var(--green);
+  border-radius: 50%;
+  display: inline-block;
+  height: 7px;
+  margin-right: 8px;
+  width: 7px;
+}
+.page-intro {
+  padding: 91px 0 80px;
+}
+.eyebrow {
+  color: var(--green);
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  margin: 0 0 27px;
+  text-transform: uppercase;
+}
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+h1 {
+  color: var(--ink);
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(62px, 9vw, 116px);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.86;
+  margin-bottom: 34px;
+}
+h1 em {
+  color: var(--green);
+  font-style: normal;
+}
+.page-intro__description {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.55;
+  max-width: 360px;
+}
+.homework-section {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  padding: 58px 0 105px;
+}
+.homework-section__heading h2 {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 46px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+.homework-section__content {
+  min-width: 0;
+}
+.homework-meta {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  display: flex;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  justify-content: space-between;
+  padding: 0 0 18px;
+  text-transform: uppercase;
+}
+.legend {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+.legend i {
+  border-radius: 50%;
+  display: inline-block;
+  height: 7px;
+  margin-left: 9px;
+  width: 7px;
+}
+.legend__completed {
+  background: var(--green);
+}
+.legend__pending {
+  background: #e78942;
+}
+.homework-list {
+  display: grid;
+  gap: 13px;
+  margin-top: 16px;
+}
+.homework-card {
+  align-items: flex-start;
+  border-radius: 3px;
+  display: flex;
+  gap: 19px;
+  min-height: 156px;
+  padding: 25px 27px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.homework-card:hover {
+  box-shadow: 8px 8px 0 rgba(25, 34, 45, 0.12);
+  transform: translate(-3px, -3px);
+}
+.homework-card--completed {
+  background: #dcefe2;
+  color: #254d37;
+}
+.homework-card--pending {
+  background: #f8dfc5;
+  color: #6b3f1d;
+}
+.homework-card__number {
+  align-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  display: flex;
+  flex: 0 0 38px;
+  font-size: 19px;
+  height: 38px;
+  justify-content: center;
+}
+.homework-card__body {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-width: 0;
+}
+.homework-card__course {
+  flex-basis: 100%;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  margin-bottom: 13px;
+  opacity: 0.72;
+  text-transform: uppercase;
+}
+.homework-card h3 {
+  flex-basis: 65%;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+.homework-card__status {
+  align-self: center;
+  font-size: 12px;
+  margin: 0;
+  text-align: right;
+}
+.homework-card__button {
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  color: inherit;
+  cursor: pointer;
+  font-size: 11px;
+  padding: 9px 11px;
+  text-transform: uppercase;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.homework-card__button:hover {
+  background: var(--ink);
+  color: #fff;
+}
+.homework-card__button span {
+  margin-left: 14px;
+}
+.site-footer {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 23px 0 30px;
+  text-transform: uppercase;
+}
+.site-footer span {
+  float: right;
+}
+@media (max-width: 760px) {
+  .app-shell {
+    padding: 0 22px;
+  }
+  .page-intro {
+    padding: 67px 0 58px;
+  }
+  .homework-section {
+    display: block;
+    padding-top: 40px;
+  }
+  .homework-section__heading {
+    margin-bottom: 44px;
+  }
+  .homework-card h3 {
+    flex-basis: 100%;
+  }
+  .homework-card__status,
+  .homework-card__button {
+    margin-top: 5px;
+    text-align: left;
+  }
+}
+@media (max-width: 460px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    min-height: 108px;
+  }
+  .header-status {
+    font-size: 9px;
+  }
+  .homework-card {
+    padding: 20px;
+  }
+  .homework-card__body {
+    display: block;
+  }
+  .homework-card h3 {
+    font-size: 24px;
+  }
+  .homework-card__status,
+  .homework-card__button {
+    display: inline-block;
+    margin-top: 4px;
+  }
+  .site-footer span {
+    float: none;
+    display: block;
+    margin-top: 9px;
+  }
+}
+
+.main-nav {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+.main-nav button,
+.task-switcher button {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font:
+    11px "Space Mono",
+    monospace;
+  padding: 12px 9px;
+  text-transform: uppercase;
+}
+.main-nav button:hover,
+.main-nav button.active,
+.task-switcher button:hover,
+.task-switcher button.active {
+  border-bottom-color: var(--blue);
+  color: var(--blue);
+}
+.schedule-section {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  padding: 58px 0 105px;
+}
+.schedule-section__heading h2 {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 46px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+.schedule-meta {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  display: flex;
+  font:
+    11px "Space Mono",
+    monospace;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  text-transform: uppercase;
+}
+.legend__online {
+  background: var(--blue);
+}
+.legend__offline {
+  background: var(--purple);
+}
+.lesson-list {
+  display: grid;
+  gap: 13px;
+  margin-top: 16px;
+}
+.lesson-card {
+  align-items: flex-start;
+  border-radius: 3px;
+  display: flex;
+  gap: 19px;
+  min-height: 156px;
+  padding: 25px 27px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.lesson-card:hover {
+  box-shadow: 8px 8px 0 rgba(25, 34, 45, 0.12);
+  transform: translate(-3px, -3px);
+}
+.lesson-card--online {
+  background: var(--blue);
+  color: #f7f9ff;
+}
+.lesson-card--offline {
+  background: var(--purple);
+  color: #fbf7ff;
+}
+.lesson-card__marker {
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  display: flex;
+  flex: 0 0 38px;
+  height: 38px;
+  justify-content: center;
+}
+.lesson-card__content {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-width: 0;
+}
+.lesson-card__type {
+  flex-basis: 100%;
+  font:
+    10px "Space Mono",
+    monospace;
+  letter-spacing: 0.1em;
+  margin-bottom: 13px;
+  opacity: 0.72;
+  text-transform: uppercase;
+}
+.lesson-card h3 {
+  flex-basis: 60%;
+  font:
+    400 27px/1.05 "DM Serif Display",
+    Georgia,
+    serif;
+  margin-bottom: 16px;
+}
+.lesson-card time {
+  align-self: center;
+  font-size: 12px;
+  opacity: 0.8;
+  text-align: right;
+}
+.lesson-card__button {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: inherit;
+  display: inline-flex;
+  font:
+    10px "Space Mono",
+    monospace;
+  gap: 14px;
+  padding: 9px 11px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.lesson-card__notice {
+  align-self: end;
+  font-size: 12px;
+  margin: 0;
+  opacity: 0.82;
+}
+.task-switcher {
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.task-switcher button {
+  padding: 19px 18px 15px;
+  text-align: left;
+}
+.task-switcher button span {
+  color: var(--ink);
+  display: block;
+  margin-top: 7px;
+  text-transform: none;
+}
+.content-grid,
+.book-layout {
+  display: grid;
+  gap: clamp(45px, 8vw, 150px);
+  padding: 78px 0 105px;
+}
+.content-grid {
+  grid-template-columns: minmax(270px, 0.75fr) 1.65fr;
+}
+.book-layout {
+  grid-template-columns: 0.85fr 1.4fr;
+}
+.section-label {
+  color: var(--coral);
+  font:
+    11px "Space Mono",
+    monospace;
+  letter-spacing: 0.13em;
+  margin: 0 0 28px;
+  text-transform: uppercase;
+}
+.section-label span {
+  color: var(--muted);
+  margin-right: 12px;
+}
+.content-grid h1,
+.book-layout h1 {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(70px, 9vw, 134px);
+  font-weight: 400;
+  letter-spacing: -0.07em;
+  line-height: 0.82;
+  margin: 0 0 35px;
+}
+.content-grid h1 span,
+.book-layout h1 span {
+  color: var(--coral);
+}
+.content-grid h2,
+.book-layout h2 {
+  font:
+    400 clamp(31px, 4vw, 53px)/1 "DM Serif Display",
+    Georgia,
+    serif;
+  margin: 0;
+}
+.lead,
+.book-description > p {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.55;
+  max-width: 340px;
+}
+.facts-list,
+.book-facts {
+  border-top: 1px solid var(--line);
+  margin: 55px 0 0;
+}
+.info-item {
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+}
+.info-item dt {
+  color: var(--muted);
+  font:
+    11px "Space Mono",
+    monospace;
+  text-transform: uppercase;
+}
+.info-item dd {
+  margin: 0;
+  text-align: right;
+}
+.section-heading {
+  align-items: end;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 34px;
+}
+.section-heading .section-label {
+  margin-bottom: 16px;
+}
+.section-count {
+  color: var(--muted);
+  font:
+    11px "Space Mono",
+    monospace;
+  text-transform: uppercase;
+}
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+}
+.photo-card {
+  background: #fbf9f3;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.photo-card img {
+  aspect-ratio: 4/5;
+  display: block;
+  object-fit: cover;
+  width: 100%;
+}
+.photo-card__body {
+  padding: 18px 17px 20px;
+}
+.photo-card h3 {
+  font:
+    400 22px "DM Serif Display",
+    Georgia,
+    serif;
+  margin-bottom: 9px;
+}
+.photo-card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.book-cover {
+  align-items: center;
+  background: #17333c;
+  box-shadow: 18px 18px 0 var(--coral);
+  color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  height: 295px;
+  justify-content: center;
+  margin: 45px 0 0 34px;
+  max-width: 220px;
+  transform: rotate(-3deg);
+}
+.book-cover span {
+  font:
+    35px "DM Serif Display",
+    Georgia,
+    serif;
+}
+.book-cover small {
+  font:
+    10px "Space Mono",
+    monospace;
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+.book-title {
+  margin-top: 64px;
+}
+.book-title h1 {
+  font-size: clamp(56px, 7vw, 95px);
+  margin-bottom: 21px;
+}
+.book-title p {
+  color: var(--coral);
+  font:
+    13px "Space Mono",
+    monospace;
+  text-transform: uppercase;
+}
+.book-description {
+  max-width: 570px;
+}
+.book-description > p {
+  max-width: 570px;
+}
+.book-facts {
+  margin-top: 40px;
+}
+.reviews-block {
+  margin-top: 85px;
+}
+.reviews-list {
+  border-top: 1px solid var(--line);
+}
+.review-card {
+  border-bottom: 1px solid var(--line);
+  padding: 22px 0 25px;
+}
+.review-card__top {
+  display: flex;
+  justify-content: space-between;
+}
+.rating {
+  color: var(--coral);
+}
+.review-author {
+  color: var(--muted);
+  font:
+    11px "Space Mono",
+    monospace;
+}
+.review-card p {
+  font:
+    22px/1.25 "DM Serif Display",
+    Georgia,
+    serif;
+  margin: 16px 0 0;
+}
+@media (max-width: 760px) {
+  .main-nav {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .schedule-section,
+  .content-grid,
+  .book-layout {
+    display: block;
+  }
+  .schedule-section__heading,
+  .intro-panel {
+    margin-bottom: 44px;
+  }
+  .lesson-card h3 {
+    flex-basis: 100%;
+  }
+  .lesson-card time {
+    margin-bottom: 16px;
+    text-align: left;
+    width: 100%;
+  }
+  .content-grid,
+  .book-layout {
+    padding-top: 45px;
+  }
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.courses-section {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  padding: 58px 0 105px;
+}
+.courses-section__heading h2 {
+  font:
+    400 46px "DM Serif Display",
+    Georgia,
+    serif;
+  letter-spacing: -0.04em;
+}
+.course-list {
+  display: grid;
+  gap: 13px;
+  grid-template-columns: repeat(3, 1fr);
+}
+.course-card {
+  border: 2px solid #cfd8d1;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(25, 34, 45, 0.08);
+  min-height: 170px;
+  padding: 20px;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+.course-card:hover {
+  box-shadow: 0 8px 16px rgba(25, 34, 45, 0.14);
+  transform: translateY(-2px);
+}
+.course-card--active {
+  background: #eff9f1;
+  border-color: #58a96f;
+}
+.course-card--completed {
+  background: #fff;
+}
+.course-card h3 {
+  font:
+    400 23px/1.1 "DM Serif Display",
+    Georgia,
+    serif;
+  margin-bottom: 16px;
+}
+.course-card__toggle {
+  background: transparent;
+  border: 0;
+  color: var(--blue);
+  cursor: pointer;
+  font:
+    11px "Space Mono",
+    monospace;
+  padding: 0;
+}
+.course-card__details {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 14px;
+}
+.course-card__details p {
+  margin: 7px 0;
+}
+.course-card__status {
+  border-radius: 999px;
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  margin-top: 8px;
+  padding: 5px 9px;
+}
+.course-card--active .course-card__status {
+  background: #ccebd3;
+  color: #216b35;
+}
+.course-card--completed .course-card__status {
+  background: #e6e6e6;
+  color: #4d5255;
+}
+.courses-content {
+  min-width: 0;
+}
+.course-search {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--ink);
+  font:
+    13px "Space Mono",
+    monospace;
+  margin-bottom: 9px;
+  padding: 11px 13px;
+  width: 100%;
+}
+.course-search:focus {
+  border-color: var(--blue);
+  outline: 2px solid rgba(40, 97, 199, 0.18);
+}
+.course-search__hint {
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 16px;
+}
+.course-search__hint strong {
+  color: var(--ink);
+}
+.course-empty {
+  color: var(--muted);
+  font-size: 13px;
+  padding: 20px 0;
+}
+.profile-editor {
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 55px;
+  justify-content: space-between;
+  padding: 58px 0 85px;
+}
+.profile-editor__form {
+  flex: 1;
+  max-width: 520px;
+}
+.profile-editor h2 {
+  font:
+    400 46px "DM Serif Display",
+    Georgia,
+    serif;
+  margin: 0 0 28px;
+}
+.profile-editor label {
+  color: var(--muted);
+  display: block;
+  font:
+    11px "Space Mono",
+    monospace;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.profile-editor input {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--ink);
+  display: block;
+  font:
+    14px "Space Mono",
+    monospace;
+  margin-top: 7px;
+  padding: 11px 13px;
+  width: 100%;
+}
+.profile-editor input:focus {
+  border-color: var(--blue);
+  outline: 2px solid rgba(40, 97, 199, 0.18);
+}
+.profile-badge {
+  align-self: flex-start;
+  background: var(--ink);
+  border-radius: 4px;
+  box-shadow: 10px 10px 0 var(--green);
+  color: var(--cream);
+  display: flex;
+  flex: 0 0 280px;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 190px;
+  padding: 25px;
+}
+.profile-badge__label {
+  color: var(--green);
+  font:
+    10px "Space Mono",
+    monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.profile-badge strong {
+  font:
+    400 30px "DM Serif Display",
+    Georgia,
+    serif;
+}
+.profile-badge span:not(.profile-badge__label) {
+  color: #c7d0d5;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 760px) {
+  .courses-section {
+    display: block;
+    padding-top: 40px;
+  }
+  .courses-section__heading {
+    margin-bottom: 44px;
+  }
+  .course-list {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .profile-editor {
+    display: block;
+  }
+  .profile-badge {
+    margin-top: 35px;
+    max-width: 280px;
+  }
+}
+.student-header {
+  border-bottom: 1px solid var(--line);
+  padding: 25px 0 20px;
+}
+.student-header__title,
+.student-header__greeting {
+  margin: 0;
+}
+.student-header__title {
+  color: var(--ink);
+  font:
+    700 18px "Space Mono",
+    monospace;
+}
+.student-header__greeting {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 8px;
+}
+.student-profile {
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 22px;
+  margin: 0 -52px;
+  padding: 22px 52px;
+}
+.student-profile__name,
+.student-profile__group,
+.student-profile__status {
+  margin: 0;
+}
+.student-profile__name {
+  font:
+    400 26px "DM Serif Display",
+    Georgia,
+    serif;
+  grid-row: span 2;
+}
+.student-profile__group,
+.student-profile__status {
+  color: var(--muted);
+  font:
+    11px "Space Mono",
+    monospace;
+}
+.student-profile__transfer {
+  align-self: center;
+  background: var(--blue);
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font:
+    11px "Space Mono",
+    monospace;
+  grid-column: 2;
+  grid-row: span 2;
+  padding: 10px 14px;
+}
+.student-profile__online {
+  color: var(--green);
+}
+.student-profile__offline {
+  color: #d05b45;
+}
+@media (max-width: 760px) {
+  .student-profile {
+    margin: 0 -22px;
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
