@@ -1,61 +1,105 @@
-import { useState } from 'react'
+import { useState, useEffect } from "react";
 
-export default function CourseReview() {
-  const [rating, setRating] = useState(5)
-  const [reviewText, setReviewText] = useState('')
-  const [isSubmitted, setIsSubmitted] = useState(false)
+interface CourseProgressProps {
+  courseTitle?: string;
+}
+
+const getSavedValue = (key: string, defaultValue: any): any => {
+  const saved = localStorage.getItem(key);
+  if (saved !== null) {
+    try {
+      return JSON.parse(saved);
+    } catch (e) {
+      return saved;
+    }
+  }
+  return defaultValue;
+};
+
+export default function CourseProgress({ courseTitle = "Курс без назви" }: CourseProgressProps) {
+  const totalLessons = 12;
+
+  const [completedLessons, setCompletedLessons] = useState<number>(() => getSavedValue("completedLessons", 0));
+  const [currentLesson, setCurrentLesson] = useState<number>(() => getSavedValue("currentLesson", 1));
+  const [lastActivity, setLastActivity] = useState<string>(() => getSavedValue("lastActivity", "Курс не розпочато"));
+
+  useEffect(() => {
+    localStorage.setItem("completedLessons", JSON.stringify(completedLessons));
+    localStorage.setItem("currentLesson", JSON.stringify(currentLesson));
+    localStorage.setItem("lastActivity", lastActivity);
+  }, [completedLessons, currentLesson, lastActivity]);
+
+  const isCourseCompleted = completedLessons >= totalLessons;
+  const progressPercentage = Math.round((completedLessons / totalLessons) * 100);
+
+  const handleCompleteLesson = () => {
+    if (isCourseCompleted) return;
+
+    setCompletedLessons((prev) => prev + 1);
+    setCurrentLesson((prev) => (prev < totalLessons ? prev + 1 : totalLessons));
+
+    const currentTime = new Date().toLocaleTimeString("uk-UA");
+    setLastActivity(`Завершено урок ${completedLessons + 1}. Оновлено ${currentTime}`);
+  };
+
+  const handleResetProgress = () => {
+    setCompletedLessons(0);
+    setCurrentLesson(1);
+    setLastActivity("Прогрес скинуто. Курс не розпочато");
+    localStorage.removeItem("completedLessons");
+    localStorage.removeItem("currentLesson");
+    localStorage.removeItem("lastActivity");
+  };
 
   return (
-    <section className="course-review" aria-labelledby="course-review-title">
-      <div className="course-review__heading">
-        <p className="eyebrow">Зворотний звʼязок / 05</p>
-        <h2 id="course-review-title">Оцініть курс</h2>
+    <article className="course-progress-card">
+      <div className="course-progress-header">
+        <h2 className="course-progress-title">{courseTitle}</h2>
+        <span className="course-progress-tag">прогресс</span>
       </div>
-      {isSubmitted ? (
-        <div className="course-review__thanks">
-          <h3>Дякуємо за відгук!</h3>
-          <p>
-            Ваша оцінка: {rating}. Ваш коментар: {reviewText || 'Коментар не залишено.'}
-          </p>
+
+      <div className="course-progress-body">
+        <div className="course-progress-counter">
+          <p className="course-progress-counter-label">Пройдено</p>
+          <div className="course-progress-counter-value">
+            {completedLessons}<span className="course-progress-counter-total">/{totalLessons}</span>
+          </div>
+          <p className="course-progress-counter-label">уроків</p>
         </div>
-      ) : (
-        <form
-          className="course-review__form"
-          onSubmit={(event) => {
-            event.preventDefault()
-            setIsSubmitted(true)
-          }}
-        >
-          <fieldset>
-            <legend>Оцінка курсу</legend>
-            <div className="course-review__ratings">
-              {[1, 2, 3, 4, 5].map((value) => (
-                <button
-                  key={value}
-                  className={rating === value ? 'is-selected' : ''}
-                  type="button"
-                  aria-pressed={rating === value}
-                  onClick={() => setRating(value)}
-                >
-                  {value}
-                </button>
-              ))}
-            </div>
-          </fieldset>
-          <label>
-            Ваш коментар
-            <textarea
-              value={reviewText}
-              onChange={(event) => setReviewText(event.target.value)}
-              placeholder="Поділіться враженнями про курс"
-              rows={5}
+
+        <div className="course-progress-bar-wrapper">
+          <div className="course-progress-status">
+            {isCourseCompleted ? "🎉 Вітаємо, курс завершено!" : `Поточний: Урок №${currentLesson}`}
+          </div>
+          <div className="course-progress-bar-track">
+            <div 
+              className="course-progress-bar-fill" 
+              style={{ width: `${progressPercentage}%` }} 
             />
-          </label>
-          <button className="course-review__submit" type="submit">
-            Відправити відгук
-          </button>
-        </form>
-      )}
-    </section>
-  )
+          </div>
+        </div>
+      </div>
+
+      <p className="course-progress-activity">
+        <strong>Остання активність:</strong> {lastActivity}
+      </p>
+
+      <div className="course-progress-actions">
+        <button 
+          className="btn-complete"
+          onClick={handleCompleteLesson} 
+          disabled={isCourseCompleted}
+        >
+          Завершити урок
+        </button>
+        
+        <button 
+          className="btn-reset"
+          onClick={handleResetProgress}
+        >
+          Скинути прогрес
+        </button>
+      </div>
+    </article>
+  );
 }
