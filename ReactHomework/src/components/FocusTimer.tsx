@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function FocusTimer() {
     const [seconds, setSeconds] = useState(0);
@@ -22,6 +22,10 @@ export default function FocusTimer() {
             clearInterval(intervalRef.current);
             intervalRef.current = null;
         }
+
+        useEffect(() => () => {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+        }, []);
         inputRef.current?.focus();
     }
 
@@ -32,24 +36,28 @@ export default function FocusTimer() {
     }
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <h3 className="font-bold text-lg text-gray-800 mb-4">Таймер фокусування</h3>
-            <div className="text-center mb-6">
-                <span className="text-4xl font-mono font-bold text-blue-600">{formatTime(seconds)}</span>
+        <section className={`focus-timer ${isActive ? 'focus-timer--active' : ''}`}>
+            <div className="focus-timer__header">
+                <div>
+                    <p className="eyebrow">Навчальний кабінет / 05</p>
+                    <h2>Таймер фокусування</h2>
+                </div>
+                <span className="focus-timer__badge">{isActive ? 'фокус' : 'готовий'}</span>
             </div>
-            <div className="flex gap-2 mb-4">
+            <div className="focus-timer__clock" aria-live="polite">{formatTime(seconds)}</div>
+            <div className="focus-timer__controls">
                 {isActive ? (
                     <button onClick={stopTimer}
-                        className="flex-1 bg-red-100 text-red-700 hover:bg-red-200 font-bold py-2 px-4 rounded-lg transition-colors">Stop</button>
+                        className="focus-timer__button focus-timer__button--stop">Завершити фокус</button>
                 ) : (
                     <button onClick={startTimer}
-                        className="flex-1 bg-green-100 text-green-700 hover:bg-green-200 font-bold py-2 px-4 rounded-lg transition-colors">Start</button>
+                        className="focus-timer__button">Почати фокус</button>
                 )}
             </div>
-            <div>
-                <label >Що ви встигли вивчити?</label>
-                <input type="text" ref={inputRef} value={note} onChange={(e) => setNote(e.target.value)} placeholder="Напишіть коротку нотатку..." />
+            <div className="focus-timer__note">
+                <label htmlFor="focus-note">Що встигли вивчити?</label>
+                <input id="focus-note" type="text" ref={inputRef} value={note} onChange={(e) => setNote(e.target.value)} placeholder="Напишіть коротку нотатку..." />
             </div>
-        </div>
+        </section>
     )
 }

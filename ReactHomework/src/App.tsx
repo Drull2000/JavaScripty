@@ -1,6 +1,5 @@
-import { useState, useEffect, type ReactNode } from 'react'
+import { useCallback, useRef, useState, useEffect, type ReactNode } from 'react'
 import CourseCard from './components/CourseCard'
-import CourseReview from './components/CourseReview'
 import { Header } from './components/Header'
 import { HomeworkCard } from './components/HomeworkCard'
 import CourseProgress, { type CourseType } from './components/CourseProgress'
@@ -9,11 +8,14 @@ import { Section } from './components/Section'
 import { StudentProfile } from './components/StudentProfile'
 import './App.css'
 import FocusTimer from './components/FocusTimer'
+import StudyReminder from './components/StudyReminder'
+import { Toaster } from 'react-hot-toast'
+import StudyLogs, { type AddStudyLog } from './components/StudyLogs'
 
 const homework = [
-  { title: 'Створити перший React-компонент', course: 'React basics', isCompleted: true, score: 96 },
-  { title: 'Додати типи до навчального проєкту', course: 'TypeScript', isCompleted: true },
-  { title: 'Зверстати адаптивну сторінку профілю', course: 'Frontend practice', isCompleted: false },
+  { title: 'Створити перший React-компонент', course: 'React basics', isCompleted: true, score: 96, deadline: '18 вересня 2026', description: 'Зберіть компонент картки курсу з props та окремими стилями.', steps: ['Створити функціональний компонент', 'Передати назву та опис через props', 'Додати адаптивні стилі'] },
+  { title: 'Додати типи до навчального проєкту', course: 'TypeScript', isCompleted: true, deadline: '24 вересня 2026', description: 'Опишіть типами дані профілю студента та список курсів.', steps: ['Створити інтерфейс Student', 'Типізувати масив курсів', 'Прибрати неявні any'] },
+  { title: 'Зверстати адаптивну сторінку профілю', course: 'Frontend practice', isCompleted: false, deadline: '12 жовтня 2026', description: 'Зробіть сторінку профілю, яка однаково добре працює на телефоні та великому екрані.', steps: ['Продумати структуру сторінки', 'Додати мобільну версію', 'Перевірити сторінку в браузері'] },
 ]
 
 const initialCourses: CourseType[] = [
@@ -170,9 +172,11 @@ function BookTask() {
 }
 
 function App() {
-  const [view, setView] = useState<'homework' | 'schedule' | 'tasks'>('homework')
+  const [view, setView] = useState<'homework' | 'homework-detail' | 'schedule' | 'tasks'>('homework')
   const [task, setTask] = useState<'city' | 'book'>('city')
+  const [selectedHomework, setSelectedHomework] = useState(0)
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const studyLogAdderRef = useRef<AddStudyLog | null>(null)
 
   const [courses, setCourses] = useState<CourseType[]>(() => {
     const saved = localStorage.getItem('app_courses_data')
@@ -203,7 +207,13 @@ function App() {
 
   const activeCourse = courses.find((c: CourseType) => c.id === selectedCourseId) || courses[0]
 
+  const registerStudyLogs = useCallback((addLog: AddStudyLog) => {
+    studyLogAdderRef.current = addLog
+  }, [])
+
   const handleCompleteLesson = () => {
+    const lessonNumber = activeCourse.completedLessons + 1
+    studyLogAdderRef.current?.(activeCourse.title, lessonNumber)
     setCourses((prevCourses: CourseType[]) =>
       prevCourses.map((c: CourseType) =>
         c.id === selectedCourseId && c.completedLessons < c.totalLessons
@@ -226,15 +236,41 @@ function App() {
   }
 
   const isTasks = view === 'tasks'
+  const isHomeworkView = view === 'homework' || view === 'homework-detail'
+  const selectedHomeworkItem = homework[selectedHomework]
 
   return (
     <div className={`app-shell ${isTasks ? 'tasks-shell' : ''}`}>
+      <Toaster position="top-right" toastOptions={{ className: 'study-toast' }} />
       <header className="site-header">
         <a className="brand" href="/">{isTasks ? 'my / react tasks' : 'study / space'}</a>
         <nav className="main-nav" aria-label="Розділи проєкту">
-          <button className={view === 'homework' ? 'active' : ''} onClick={() => setView('homework')}>Домашні завдання</button>
+          <div className={`nav-dropdown ${isHomeworkView ? 'active' : ''}`}>
+            <button
+              className="nav-dropdown__trigger"
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={isHomeworkView}
+              onClick={() => setView('homework')}
+            >
+              Домашні завдання <span aria-hidden="true">⌄</span>
+            </button>
+            <div className="nav-dropdown__menu">
+              <button className={isHomeworkView ? 'active' : ''} type="button" onClick={() => setView('homework')}>
+                <strong>Усі домашки</strong>
+                <span>Прогрес і оцінки</span>
+              </button>
+              {homework.map((item, index) => (
+                <button key={item.title} className={view === 'homework-detail' && selectedHomework === index ? 'active' : ''} type="button" onClick={() => { setSelectedHomework(index); setView('homework-detail') }}>
+                  <strong>Домашка {index + 1}</strong>
+                  <span>{item.course}</span>
+                </button>
+              ))}
+            </div>
+          </div>
           <button className={view === 'schedule' ? 'active' : ''} onClick={() => setView('schedule')}>Розклад</button>
-          <button className={view === 'tasks' ? 'active' : ''} onClick={() => setView('tasks')}>React tasks</button>
+          <button className={view === 'tasks' && task === 'city' ? 'active' : ''} onClick={() => { setTask('city'); setView('tasks') }}>Завдання 1</button>
+          <button className={view === 'tasks' && task === 'book' ? 'active' : ''} onClick={() => { setTask('book'); setView('tasks') }}>Завдання 2</button>
         </nav>
         <span className="header-status"><span aria-hidden="true" /> вересень 2026</span>
       </header>
@@ -256,7 +292,13 @@ function App() {
                 <span className="legend"><i className="legend__completed" /> виконано <i className="legend__pending" /> у роботі</span>
               </div>
               <div className="homework-list">
-                {homework.map((item) => <HomeworkCard key={item.title} {...item} />)}
+                {homework.map((item, index) => (
+                  <HomeworkCard
+                    key={item.title}
+                    {...item}
+                    onOpen={() => { setSelectedHomework(index); setView('homework-detail') }}
+                  />
+                ))}
               </div>
             </Section>
 
@@ -294,6 +336,7 @@ function App() {
                   ) : (
                     <p className="course-empty">Курсів не знайдено.</p>
                   )}
+
                 </div>
               </div>
             </section>
@@ -305,10 +348,44 @@ function App() {
             />
             <ProfileEditor />
             <FocusTimer />
-            <CourseReview />
+            <StudyReminder />
+            <StudyLogs onRegister={registerStudyLogs} />
           </main>
           <footer className="site-footer">React + TypeScript <span>Обʼєднаний проєкт / 2026</span></footer>
         </>
+      )}
+
+      {view === 'homework-detail' && (
+        <main className="homework-detail">
+          <button className="back-link" type="button" onClick={() => setView('homework')}>← Назад до моїх домашок</button>
+          <div className="homework-detail__hero">
+            <div>
+              <SectionLabel number={`0${selectedHomework + 1}`}>{selectedHomeworkItem.course}</SectionLabel>
+              <h1>{selectedHomeworkItem.title}<span>.</span></h1>
+              <p className="lead">{selectedHomeworkItem.description}</p>
+            </div>
+            <div className={`detail-status ${selectedHomeworkItem.isCompleted ? 'detail-status--done' : ''}`}>
+              <span>{selectedHomeworkItem.isCompleted ? '✓' : '!'}</span>
+              <strong>{selectedHomeworkItem.isCompleted ? 'Виконано' : 'У роботі'}</strong>
+              <small>Дедлайн: {selectedHomeworkItem.deadline}</small>
+            </div>
+          </div>
+          <section className="homework-detail__content">
+            <div>
+              <SectionLabel number="01">план роботи</SectionLabel>
+              <h2>Що потрібно зробити</h2>
+              <ol className="homework-steps">
+                {selectedHomeworkItem.steps.map((step) => <li key={step}>{step}</li>)}
+              </ol>
+            </div>
+            <aside className="homework-detail__aside">
+              <span className="eyebrow">Результат</span>
+              <strong>{selectedHomeworkItem.isCompleted ? `${selectedHomeworkItem.score ?? '—'} / 100` : '0 / 100'}</strong>
+              <p>{selectedHomeworkItem.isCompleted ? 'Роботу вже перевірено викладачем.' : 'Після завершення прикріпіть посилання на роботу.'}</p>
+              {!selectedHomeworkItem.isCompleted && <button className="homework-card__button" type="button">Здати роботу <span aria-hidden="true">→</span></button>}
+            </aside>
+          </section>
+        </main>
       )}
 
       {view === 'schedule' && (
