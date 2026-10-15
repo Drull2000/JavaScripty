@@ -7,6 +7,7 @@ export interface CourseType {
   totalLessons: number;
   teacher: string;
   credits: number;
+  description?: string;
 }
 
 interface CourseProgressProps {
