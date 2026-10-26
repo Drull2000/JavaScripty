@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { getAssignmentById, type Assignment } from '../data/assignments'
+import { useState } from 'react'
+import { executeAssignment, getAssignmentResource } from '../data/assignments'
 
 interface AssignmentDetailsProps {
   assignmentId: string
@@ -8,43 +8,24 @@ interface AssignmentDetailsProps {
 }
 
 export default function AssignmentDetails({ assignmentId, number, onBack }: AssignmentDetailsProps) {
-  const [assignment, setAssignment] = useState<Assignment | null>(null)
+  const assignment = getAssignmentResource(assignmentId).read()
+  const [isCompleted, setIsCompleted] = useState(assignment.isCompleted)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    let isCurrent = true
-    setAssignment(null)
+  const handleComplete = () => {
+    if (isCompleted || isSubmitting) return
+
     setError(null)
+    setIsCompleted(true)
+    setIsSubmitting(true)
 
-    getAssignmentById(assignmentId)
-      .then((data) => {
-        if (isCurrent) setAssignment(data)
-      })
+    executeAssignment(assignmentId)
       .catch((reason: unknown) => {
-        if (isCurrent) setError(reason instanceof Error ? reason.message : 'Не вдалося завантажити завдання')
+        setIsCompleted(false)
+        setError(reason instanceof Error ? reason.message : 'Не вдалося виконати завдання')
       })
-
-    return () => {
-      isCurrent = false
-    }
-  }, [assignmentId])
-
-  if (error) {
-    return (
-      <main className="homework-detail">
-        <button className="back-link" type="button" onClick={onBack}>← Назад до моїх домашок</button>
-        <p className="assignment-state assignment-state--error">{error}</p>
-      </main>
-    )
-  }
-
-  if (!assignment) {
-    return (
-      <main className="homework-detail">
-        <button className="back-link" type="button" onClick={onBack}>← Назад до моїх домашок</button>
-        <p className="assignment-state">Завантажуємо деталі завдання з бази даних...</p>
-      </main>
-    )
+      .finally(() => setIsSubmitting(false))
   }
 
   return (
@@ -56,9 +37,9 @@ export default function AssignmentDetails({ assignmentId, number, onBack }: Assi
           <h1>{assignment.title}<span>.</span></h1>
           <p className="lead">{assignment.description}</p>
         </div>
-        <div className={`detail-status ${assignment.isCompleted ? 'detail-status--done' : ''}`}>
-          <span>{assignment.isCompleted ? '✓' : '!'}</span>
-          <strong>{assignment.isCompleted ? 'Виконано' : 'У роботі'}</strong>
+        <div className={`detail-status ${isCompleted ? 'detail-status--done' : ''}`}>
+          <span>{isCompleted ? '✓' : '!'}</span>
+          <strong>{isCompleted ? 'Виконано' : 'У роботі'}</strong>
           <small>Видано: {assignment.issuedAt}<br />Дедлайн: {assignment.deadline}</small>
         </div>
       </div>
@@ -72,9 +53,18 @@ export default function AssignmentDetails({ assignmentId, number, onBack }: Assi
         </div>
         <aside className="homework-detail__aside">
           <span className="eyebrow">Результат</span>
-          <strong>{assignment.isCompleted ? `${assignment.score ?? '—'} / 100` : '0 / 100'}</strong>
-          <p>{assignment.isCompleted ? 'Роботу вже перевірено викладачем.' : 'Після завершення прикріпіть посилання на роботу.'}</p>
-          {!assignment.isCompleted && <button className="homework-card__button" type="button">Здати роботу <span aria-hidden="true">→</span></button>}
+          <strong>{isCompleted ? `${assignment.score ?? '—'} / 100` : '0 / 100'}</strong>
+          <p>{isCompleted ? 'Завдання виконано та збережено.' : 'Після виконання результат буде збережено.'}</p>
+          {error && <p className="assignment-state--error">{error}</p>}
+          <button
+            className="homework-card__button"
+            type="button"
+            onClick={handleComplete}
+            disabled={isCompleted || isSubmitting}
+          >
+            {isSubmitting ? 'Зберігаємо...' : isCompleted ? 'Завдання виконано' : 'Виконати завдання'}
+            {!isCompleted && !isSubmitting && <span aria-hidden="true">→</span>}
+          </button>
         </aside>
       </section>
     </main>

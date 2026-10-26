@@ -56,3 +56,57 @@ export function getAssignmentById(id: string): Promise<Assignment> {
     }, 450)
   })
 }
+
+export function executeAssignment(id: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    window.setTimeout(() => {
+      if (!assignments.some((item) => item.id === id)) {
+        reject(new Error('Завдання не знайдено'))
+        return
+      }
+
+      if (Math.random() < 0.05) {
+        reject(new Error('Не вдалося зберегти результат. Спробуйте ще раз.'))
+        return
+      }
+
+      resolve()
+    }, 650)
+  })
+}
+
+interface AssignmentResource {
+  read: () => Assignment
+}
+
+const assignmentResources = new Map<string, AssignmentResource>()
+
+export function getAssignmentResource(id: string): AssignmentResource {
+  const cachedResource = assignmentResources.get(id)
+  if (cachedResource) return cachedResource
+
+  let status: 'pending' | 'success' | 'error' = 'pending'
+  let result: Assignment
+  let error: unknown
+  const promise = getAssignmentById(id).then(
+    (data) => {
+      status = 'success'
+      result = data
+    },
+    (reason: unknown) => {
+      status = 'error'
+      error = reason
+    },
+  )
+
+  const resource: AssignmentResource = {
+    read: () => {
+      if (status === 'pending') throw promise
+      if (status === 'error') throw error
+      return result
+    },
+  }
+
+  assignmentResources.set(id, resource)
+  return resource
+}

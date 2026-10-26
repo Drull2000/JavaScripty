@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, useEffect, type ReactNode } from 'react'
+import { Suspense, useCallback, useRef, useState, useEffect, type ReactNode } from 'react'
 import CourseCard from './components/CourseCard'
 import { Header } from './components/Header'
 import { HomeworkCard } from './components/HomeworkCard'
@@ -13,6 +13,7 @@ import { Toaster } from 'react-hot-toast'
 import StudyLogs, { type AddStudyLog } from './components/StudyLogs'
 import { courseDetailsData } from './data/courses'
 import AssignmentDetails from './components/AssignmentDetails'
+import AssignmentDetailsSkeleton from './components/AssignmentDetailsSkeleton'
 import { assignments } from './data/assignments'
 
 const initialCourses: CourseType[] = [
@@ -355,11 +356,14 @@ function App() {
       )}
 
       {view === 'homework-detail' && (
-        <AssignmentDetails
-          assignmentId={assignments[selectedHomework].id}
-          number={`0${selectedHomework + 1}`}
-          onBack={() => setView('homework')}
-        />
+        <Suspense fallback={<AssignmentDetailsSkeleton />}>
+          <AssignmentDetails
+            key={assignments[selectedHomework].id}
+            assignmentId={assignments[selectedHomework].id}
+            number={`0${selectedHomework + 1}`}
+            onBack={() => setView('homework')}
+          />
+        </Suspense>
       )}
 
       {view === 'schedule' && (

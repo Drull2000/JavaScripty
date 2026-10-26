@@ -156,6 +156,55 @@ h1 em {
   border-color: var(--coral);
   color: var(--coral);
 }
+.assignment-skeleton__back,
+.assignment-skeleton__label,
+.assignment-skeleton__title,
+.assignment-skeleton__description,
+.assignment-skeleton__status,
+.assignment-skeleton__heading,
+.assignment-skeleton__lines,
+.assignment-skeleton__aside {
+  animation: assignment-skeleton-pulse 1.4s ease-in-out infinite;
+  background: rgba(25, 34, 45, 0.1);
+}
+.assignment-skeleton__back {
+  height: 15px;
+  margin-bottom: 62px;
+  width: 190px;
+}
+.assignment-skeleton__label {
+  height: 12px;
+  margin-bottom: 27px;
+  width: 180px;
+}
+.assignment-skeleton__title {
+  height: clamp(52px, 8vw, 100px);
+  margin-bottom: 34px;
+  max-width: 700px;
+}
+.assignment-skeleton__description {
+  height: 48px;
+  max-width: 520px;
+}
+.assignment-skeleton__status {
+  height: 110px;
+}
+.assignment-skeleton__heading {
+  height: 55px;
+  margin-bottom: 28px;
+  max-width: 440px;
+}
+.assignment-skeleton__lines {
+  height: 120px;
+  max-width: 600px;
+}
+.assignment-skeleton__aside {
+  height: 190px;
+}
+@keyframes assignment-skeleton-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
 .homework-card__actions {
   align-items: center;
   align-self: center;
