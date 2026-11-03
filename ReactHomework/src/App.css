@@ -1407,6 +1407,86 @@ h1 em {
   border-color: var(--blue);
   outline: 2px solid rgba(40, 97, 199, 0.18);
 }
+.profile-editor__field-label {
+  color: var(--muted);
+  display: block;
+  font: 11px "Space Mono", monospace;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.profile-editor__phones {
+  margin-bottom: 16px;
+}
+.profile-editor__phone-row {
+  align-items: start;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.profile-editor__phone-row input {
+  flex: 1;
+  margin: 0;
+}
+.profile-editor__remove,
+.profile-editor__add {
+  background: transparent;
+  border: 0;
+  color: var(--blue);
+  cursor: pointer;
+  font: 11px "Space Mono", monospace;
+  padding: 8px 0;
+}
+.profile-editor__remove {
+  color: var(--coral);
+}
+.profile-editor__add {
+  margin-top: 2px;
+}
+.profile-editor__error {
+  color: var(--coral);
+  display: block;
+  font-size: 10px;
+  margin-top: 5px;
+  text-transform: none;
+}
+.profile-editor__select {
+  font-family: "Space Mono", monospace;
+  margin-top: 8px;
+  text-transform: none;
+}
+.profile-select__control {
+  background: transparent !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 3px !important;
+  box-shadow: none !important;
+  min-height: 42px !important;
+}
+.profile-select__control--is-focused {
+  border-color: var(--blue) !important;
+  outline: 2px solid rgba(40, 97, 199, 0.18);
+}
+.profile-select__menu {
+  background: var(--cream) !important;
+  z-index: 3 !important;
+}
+.profile-select__option--is-focused {
+  background: rgba(40, 97, 199, 0.12) !important;
+}
+.profile-select__multi-value {
+  background: rgba(73, 168, 120, 0.18) !important;
+}
+.profile-editor__submit {
+  background: var(--blue);
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font: 11px "Space Mono", monospace;
+  padding: 12px 15px;
+  text-transform: uppercase;
+}
+.profile-editor__submit:hover {
+  background: var(--ink);
+}
 .profile-editor__checkbox-label {
   align-items: center;
   display: flex !important;
