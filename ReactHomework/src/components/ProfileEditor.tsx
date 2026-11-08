@@ -44,9 +44,24 @@ export default function ProfileEditor() {
   const { fields, append, remove } = useFieldArray({ control, name: 'phones' })
   const profile = watch()
 
-  const onSubmit = (values: ProfileFormValues) => {
-    toast.success('Профіль збережено')
-    console.log('Profile updated', values)
+  const onSubmit = async (values: ProfileFormValues) => {
+    try {
+      const response = await fetch('/api/update-profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      })
+      const result: unknown = await response.json()
+      if (!response.ok) {
+        const message = typeof result === 'object' && result !== null && 'error' in result && typeof result.error === 'string'
+          ? result.error
+          : 'Не вдалося зберегти профіль'
+        throw new Error(message)
+      }
+      toast.success('Профіль збережено')
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : 'Не вдалося зберегти профіль')
+    }
   }
 
   return (

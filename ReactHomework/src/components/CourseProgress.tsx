@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 
 export interface CourseType {
   id: string;
@@ -12,7 +13,7 @@ export interface CourseType {
 
 interface CourseProgressProps {
   course?: CourseType;
-  onCompleteLesson?: () => void;
+  onCompleteLesson?: () => Promise<void> | void;
   onResetProgress?: () => void;
 }
 
@@ -26,6 +27,11 @@ export default function CourseProgress({
   onCompleteLesson,
   onResetProgress
 }: CourseProgressProps) {
+  const [lastActivity, setLastActivity] = useState<string>(() => {
+    return course ? getSavedValue(`course_activity_${course.id}`, "Курс не розпочато") : "Курс не розпочато";
+  });
+  const [isUpdating, setIsUpdating] = useState(false);
+
   if (!course) {
     return (
       <div className="course-progress-empty">
@@ -35,10 +41,6 @@ export default function CourseProgress({
   }
 
   const storageKey = `course_activity_${course.id}`;
-
-  const [lastActivity, setLastActivity] = useState<string>(() => {
-    return getSavedValue(storageKey, "Курс не розпочато");
-  });
 
   useEffect(() => {
     setLastActivity(getSavedValue(storageKey, "Курс не розпочато"));
@@ -52,14 +54,32 @@ export default function CourseProgress({
   const currentLesson = isCourseCompleted ? course.totalLessons : course.completedLessons + 1;
   const progressPercentage = Math.round((course.completedLessons / course.totalLessons) * 100);
 
-  const handleComplete = () => {
-    if (isCourseCompleted) return;
+  const handleComplete = async () => {
+    if (isCourseCompleted || isUpdating) return;
 
-    const currentTime = new Date().toLocaleTimeString("uk-UA");
-    setLastActivity(`Завершено урок ${course.completedLessons + 1}. Оновлено ${currentTime}`);
+    setIsUpdating(true);
+    try {
+      const moduleIndex = course.completedLessons;
+      const response = await fetch(`/api/courses/${encodeURIComponent(course.id)}/modules/${moduleIndex}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ completed: true }),
+      });
+      if (!response.ok) {
+        const result: unknown = await response.json();
+        const message = typeof result === "object" && result !== null && "error" in result && typeof result.error === "string"
+          ? result.error
+          : "Не вдалося оновити статус модуля";
+        throw new Error(message);
+      }
 
-    if (onCompleteLesson) {
-      onCompleteLesson();
+      const currentTime = new Date().toLocaleTimeString("uk-UA");
+      setLastActivity(`Завершено урок ${course.completedLessons + 1}. Оновлено ${currentTime}`);
+      await onCompleteLesson?.();
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : "Не вдалося оновити статус модуля");
+    } finally {
+      setIsUpdating(false);
     }
   };
 
@@ -112,9 +132,9 @@ export default function CourseProgress({
         <button
           className="btn-complete"
           onClick={handleComplete}
-          disabled={isCourseCompleted}
+          disabled={isCourseCompleted || isUpdating}
         >
-          {isCourseCompleted ? "Курс завершено" : "Позначити урок пройденим"}
+          {isCourseCompleted ? "Курс завершено" : isUpdating ? "Збереження..." : "Позначити урок пройденим"}
         </button>
 
         <button className="btn-reset" onClick={handleReset}>

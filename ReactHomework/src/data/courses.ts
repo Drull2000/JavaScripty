@@ -79,7 +79,7 @@ export const courseDetailsData: CourseDetails[] = [
       { name: 'Серверні та клієнтські компоненти', isCompleted: true },
       { name: 'Інтеграція з базою даних', isCompleted: true },
       { name: 'Аутентифікація користувачів', isCompleted: false },
-      { name: 'Деплой та оптимізація продуктивності', isCompleted: false },
+      // { name: 'Деплой та оптимізація продуктивності', isCompleted: false },
     ],
     completedModules: 3,
   },

@@ -1,0 +1,12 @@
+{
+  "fullName": "Ваше Імʼя",
+  "email": "",
+  "phones": [
+    {
+      "value": ""
+    }
+  ],
+  "languages": [],
+  "specialty": "React Developer",
+  "isOnline": true
+}
