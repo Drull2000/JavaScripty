@@ -5,6 +5,7 @@ import type { IncomingMessage, ServerResponse } from 'node:http'
 const dataDirectory = resolve(process.cwd(), 'server', 'data')
 const profilePath = resolve(dataDirectory, 'profile.json')
 const progressPath = resolve(dataDirectory, 'course-progress.json')
+const assignmentStatusPath = resolve(dataDirectory, 'assignment-status.json')
 
 type JsonRecord = Record<string, unknown>
 
@@ -51,6 +52,25 @@ export async function handleApiRequest(request: IncomingMessage, response: Serve
   const url = new URL(request.url ?? '/', 'http://localhost')
 
   try {
+    if (url.pathname === '/api/profile' && request.method === 'GET') {
+      const profile = await readJson(profilePath, {
+        fullName: 'Владислав',
+        email: '',
+        phones: [{ value: '' }],
+        languages: [],
+        specialty: 'React Developer',
+        isOnline: true,
+      })
+      sendJson(response, 200, { profile })
+      return true
+    }
+
+    if (url.pathname === '/api/assignments/statuses' && request.method === 'GET') {
+      const statuses = await readJson<Record<string, boolean>>(assignmentStatusPath, {})
+      sendJson(response, 200, { statuses })
+      return true
+    }
+
     if (url.pathname === '/api/update-profile' && request.method === 'POST') {
       const body = await readBody(request)
       if (!isRecord(body) || typeof body.fullName !== 'string' || typeof body.email !== 'string' || !Array.isArray(body.phones) || !Array.isArray(body.languages)) {
@@ -60,6 +80,24 @@ export async function handleApiRequest(request: IncomingMessage, response: Serve
 
       await writeJson(profilePath, body)
       sendJson(response, 200, { profile: body })
+      return true
+    }
+
+    const assignmentMatch = url.pathname.match(/^\/api\/assignments\/([^/]+)\/status$/)
+    if (assignmentMatch && request.method === 'PATCH') {
+      const [, assignmentId] = assignmentMatch
+      const body = await readBody(request)
+      if (!isRecord(body) || typeof body.isCompleted !== 'boolean') {
+        sendJson(response, 400, { error: 'Поле isCompleted має бути boolean' })
+        return true
+      }
+
+      const statuses = await readJson<Record<string, boolean>>(assignmentStatusPath, {})
+      statuses[assignmentId] = body.isCompleted
+      await writeJson(assignmentStatusPath, statuses)
+      sendJson(response, 200, {
+        assignment: { id: assignmentId, isCompleted: body.isCompleted },
+      })
       return true
     }
 

@@ -14,7 +14,9 @@ import StudyLogs, { type AddStudyLog } from './components/StudyLogs'
 import { courseDetailsData } from './data/courses'
 import AssignmentDetails from './components/AssignmentDetails'
 import AssignmentDetailsSkeleton from './components/AssignmentDetailsSkeleton'
-import { assignments } from './data/assignments'
+import { assignments, getAssignments } from './data/assignments'
+import { useQuery } from '@tanstack/react-query'
+import { getUserProfile } from './data/profile'
 
 const initialCourses: CourseType[] = [
   ...courseDetailsData.map((course, index) => ({
@@ -200,10 +202,23 @@ function App() {
   }, [selectedCourseId])
 
   const [userProfile, setUserProfile] = useState({
-    name: 'Владислав',
-    group: 'P-410',
     isOnline: true,
   })
+  const profileQuery = useQuery({
+    queryKey: ['user-profile'],
+    queryFn: getUserProfile,
+  })
+  const assignmentsQuery = useQuery({
+    queryKey: ['assignments'],
+    queryFn: getAssignments,
+  })
+  const assignmentList = assignmentsQuery.data ?? assignments
+
+  useEffect(() => {
+    if (profileQuery.data) {
+      setUserProfile({ isOnline: profileQuery.data.isOnline })
+    }
+  }, [profileQuery.data])
 
   const filteredCourses = courses.filter((course: CourseType) =>
     course.title.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -280,7 +295,12 @@ function App() {
       {view === 'homework' && (
         <>
           <Header studentName="Владислав" />
-          <StudentProfile {...userProfile} onTransfer={handleTransfer} />
+          <StudentProfile
+            name={profileQuery.data?.fullName || 'Владислав'}
+            group="P-410"
+            isOnline={userProfile.isOnline}
+            onTransfer={handleTransfer}
+          />
           <main>
             <div className="page-intro">
               <p className="eyebrow">Особистий кабінет студента</p>
@@ -290,11 +310,11 @@ function App() {
 
             <Section title="Мої домашки">
               <div className="homework-meta">
-                <span>{assignments.length} завдання</span>
+                <span>{assignmentList.length} завдання</span>
                 <span className="legend"><i className="legend__completed" /> виконано <i className="legend__pending" /> у роботі</span>
               </div>
               <div className="homework-list">
-                {assignments.map((item, index) => (
+                {assignmentList.map((item, index) => (
                   <HomeworkCard
                     key={item.id}
                     {...item}
@@ -357,12 +377,14 @@ function App() {
 
       {view === 'homework-detail' && (
         <Suspense fallback={<AssignmentDetailsSkeleton />}>
-          <AssignmentDetails
-            key={assignments[selectedHomework].id}
-            assignmentId={assignments[selectedHomework].id}
-            number={`0${selectedHomework + 1}`}
-            onBack={() => setView('homework')}
-          />
+          {assignmentList[selectedHomework] && (
+            <AssignmentDetails
+              key={assignmentList[selectedHomework].id}
+              assignment={assignmentList[selectedHomework]}
+              number={`0${selectedHomework + 1}`}
+              onBack={() => setView('homework')}
+            />
+          )}
         </Suspense>
       )}
 

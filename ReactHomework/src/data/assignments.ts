@@ -44,6 +44,28 @@ export const assignments: Assignment[] = [
   },
 ]
 
+export async function getAssignments(): Promise<Assignment[]> {
+  const response = await fetch('/api/assignments/statuses')
+  const result: unknown = await response.json()
+
+  if (!response.ok || typeof result !== 'object' || result === null || !('statuses' in result)) {
+    throw new Error('Не вдалося завантажити статуси завдань')
+  }
+
+  const statuses = result.statuses
+  if (typeof statuses !== 'object' || statuses === null || Array.isArray(statuses)) {
+    throw new Error('Сервер повернув некоректні статуси завдань')
+  }
+  const statusRecord = statuses as Record<string, unknown>
+
+  return assignments.map((assignment) => ({
+    ...assignment,
+    isCompleted: assignment.id in statusRecord && typeof statusRecord[assignment.id] === 'boolean'
+      ? statusRecord[assignment.id] as boolean
+      : assignment.isCompleted,
+  }))
+}
+
 export function getAssignmentById(id: string): Promise<Assignment> {
   return new Promise((resolve, reject) => {
     window.setTimeout(() => {
@@ -73,6 +95,28 @@ export function executeAssignment(id: string): Promise<void> {
       resolve()
     }, 650)
   })
+}
+
+export async function updateAssignmentStatus(id: string, isCompleted: boolean): Promise<Assignment> {
+  const response = await fetch(`/api/assignments/${encodeURIComponent(id)}/status`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ isCompleted }),
+  })
+  const result: unknown = await response.json()
+
+  if (!response.ok) {
+    const message = typeof result === 'object' && result !== null && 'error' in result && typeof result.error === 'string'
+      ? result.error
+      : 'Не вдалося оновити статус завдання'
+    throw new Error(message)
+  }
+
+  if (typeof result !== 'object' || result === null || !('assignment' in result)) {
+    throw new Error('Сервер повернув некоректний статус завдання')
+  }
+
+  return result.assignment as Assignment
 }
 
 interface AssignmentResource {

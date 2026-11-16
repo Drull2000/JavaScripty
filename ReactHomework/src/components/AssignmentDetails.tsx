@@ -1,31 +1,34 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
-import { executeAssignment, getAssignmentResource } from '../data/assignments'
+import { type Assignment, updateAssignmentStatus } from '../data/assignments'
 
 interface AssignmentDetailsProps {
-  assignmentId: string
+  assignment: Assignment
   number: string
   onBack: () => void
 }
 
-export default function AssignmentDetails({ assignmentId, number, onBack }: AssignmentDetailsProps) {
-  const assignment = getAssignmentResource(assignmentId).read()
+export default function AssignmentDetails({ assignment, number, onBack }: AssignmentDetailsProps) {
+  const queryClient = useQueryClient()
   const [isCompleted, setIsCompleted] = useState(assignment.isCompleted)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const mutation = useMutation({
+    mutationFn: (completed: boolean) => updateAssignmentStatus(assignment.id, completed),
+    onSuccess: (updatedAssignment) => {
+      queryClient.setQueryData<Assignment[]>(['assignments'], (currentAssignments) =>
+        currentAssignments?.map((item) => item.id === updatedAssignment.id
+          ? { ...item, isCompleted: updatedAssignment.isCompleted }
+          : item),
+      )
+    },
+  })
 
   const handleComplete = () => {
-    if (isCompleted || isSubmitting) return
+    if (isCompleted || mutation.isPending) return
 
-    setError(null)
     setIsCompleted(true)
-    setIsSubmitting(true)
-
-    executeAssignment(assignmentId)
-      .catch((reason: unknown) => {
-        setIsCompleted(false)
-        setError(reason instanceof Error ? reason.message : 'Не вдалося виконати завдання')
-      })
-      .finally(() => setIsSubmitting(false))
+    mutation.mutate(true, {
+      onError: () => setIsCompleted(false),
+    })
   }
 
   return (
@@ -55,15 +58,15 @@ export default function AssignmentDetails({ assignmentId, number, onBack }: Assi
           <span className="eyebrow">Результат</span>
           <strong>{isCompleted ? `${assignment.score ?? '—'} / 100` : '0 / 100'}</strong>
           <p>{isCompleted ? 'Завдання виконано та збережено.' : 'Після виконання результат буде збережено.'}</p>
-          {error && <p className="assignment-state--error">{error}</p>}
+          {mutation.error && <p className="assignment-state--error">{mutation.error.message}</p>}
           <button
             className="homework-card__button"
             type="button"
             onClick={handleComplete}
-            disabled={isCompleted || isSubmitting}
+            disabled={isCompleted || mutation.isPending}
           >
-            {isSubmitting ? 'Зберігаємо...' : isCompleted ? 'Завдання виконано' : 'Виконати завдання'}
-            {!isCompleted && !isSubmitting && <span aria-hidden="true">→</span>}
+            {mutation.isPending ? 'Зберігаємо...' : isCompleted ? 'Завдання виконано' : 'Виконати завдання'}
+            {!isCompleted && !mutation.isPending && <span aria-hidden="true">→</span>}
           </button>
         </aside>
       </section>
